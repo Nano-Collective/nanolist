@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "include": ["/*"],
+  "exclude": [
+    "/_next/*",
+    "/icons/*",
+    "/atom.xml",
+    "/favicon.ico",
+    "/feed.xml",
+    "/listings.json",
+    "/llms.txt",
+    "/recommended.xml",
+    "/robots.txt",
+    "/sitemap.xml"
+  ]
+}
