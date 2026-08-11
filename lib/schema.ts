@@ -104,7 +104,7 @@ export const listingSchema = z
       .nullable(),
     icon: z
       .string()
-      .regex(/^\/icons\/[a-z0-9-]+\.png$/)
+      .regex(/^\/icons\/[a-z0-9-]+\.(png|ico|jpg|jpeg|gif|webp)$/)
       .nullable(),
     submittedBy: z.string().max(40).nullable(),
     addedAt: z.string().regex(ISO_DATE, {

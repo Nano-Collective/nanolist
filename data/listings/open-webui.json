@@ -15,7 +15,7 @@
   "pricing": "open-source",
   "license": null,
   "github": "https://github.com/open-webui/open-webui",
-  "icon": null,
+  "icon": "/icons/open-webui.png",
   "submittedBy": null,
   "addedAt": "2026-08-11",
   "recommendedAt": null,

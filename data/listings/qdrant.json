@@ -15,7 +15,7 @@
   "pricing": "open-source",
   "license": "Apache-2.0",
   "github": "https://github.com/qdrant/qdrant",
-  "icon": null,
+  "icon": "/icons/qdrant.png",
   "submittedBy": null,
   "addedAt": "2026-08-11",
   "recommendedAt": null,

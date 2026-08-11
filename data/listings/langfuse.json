@@ -15,7 +15,7 @@
   "pricing": "open-source",
   "license": "MIT",
   "github": "https://github.com/langfuse/langfuse",
-  "icon": null,
+  "icon": "/icons/langfuse.png",
   "submittedBy": null,
   "addedAt": "2026-08-11",
   "recommendedAt": null,

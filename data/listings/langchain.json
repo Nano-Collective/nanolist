@@ -15,7 +15,7 @@
   "pricing": "open-source",
   "license": "MIT",
   "github": "https://github.com/langchain-ai/langchain",
-  "icon": null,
+  "icon": "/icons/langchain.png",
   "submittedBy": null,
   "addedAt": "2026-08-11",
   "recommendedAt": null,

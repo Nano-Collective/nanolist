@@ -15,7 +15,7 @@
   "pricing": "open-source",
   "license": "Apache-2.0",
   "github": "https://github.com/continuedev/continue",
-  "icon": null,
+  "icon": "/icons/continue.png",
   "submittedBy": null,
   "addedAt": "2026-08-11",
   "recommendedAt": null,

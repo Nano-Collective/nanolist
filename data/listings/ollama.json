@@ -15,7 +15,7 @@
   "pricing": "open-source",
   "license": "MIT",
   "github": "https://github.com/ollama/ollama",
-  "icon": null,
+  "icon": "/icons/ollama.png",
   "submittedBy": null,
   "addedAt": "2026-08-11",
   "recommendedAt": null,
