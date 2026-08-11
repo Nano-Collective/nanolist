@@ -1,0 +1,81 @@
+# CI checks for every pull request, plus a guard that keeps bot-created
+# submission branches from touching anything other than listing data.
+name: PR checks
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-checks-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up PNPM
+        uses: pnpm/action-setup@v4
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run linting
+        run: pnpm lint
+
+      - name: Run type checking
+        run: pnpm types
+
+      - name: Check for unused files and dependencies
+        run: pnpm knip
+
+      - name: Validate listings
+        run: pnpm validate
+
+      - name: Build site
+        run: pnpm exec next build --turbopack
+
+  # Submission PRs are created by automation from hostile submitter input.
+  # They may only ever add listing JSON and icons — anything else fails.
+  submission-guard:
+    if: startsWith(github.head_ref, 'submission/')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Only listing and icon files may change
+        # github.base_ref is the PR's target branch name — repository
+        # controlled (branches exist only if a collaborator created them),
+        # so it is safe to interpolate here. No submitter-controlled value
+        # is interpolated into this script.
+        run: |
+          set -o pipefail
+          CHANGED="$(git diff --name-only "origin/${{ github.base_ref }}...")"
+          echo "Changed files:"
+          # Indent when printing so file names can never be parsed as
+          # ::workflow-commands:: (which must start at column 0).
+          printf '%s\n' "$CHANGED" | sed 's/^/  /'
+          BAD="$(printf '%s\n' "$CHANGED" \
+            | grep -v '^$' \
+            | grep -Ev '^data/listings/[a-z0-9-]+\.json$|^public/icons/' \
+            || true)"
+          if [ -n "$BAD" ]; then
+            echo "::error::Submission PRs may only change data/listings/*.json and public/icons/ files."
+            echo "Disallowed paths:"
+            printf '%s\n' "$BAD" | sed 's/^/  /'
+            exit 1
+          fi

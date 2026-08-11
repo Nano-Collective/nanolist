@@ -1,0 +1,105 @@
+name: Submit a listing
+description: Suggest an AI tool, framework, library, or model for nanolist.
+title: "[Listing]: "
+labels: ["listing-submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Submission policy
+
+        Nanolist accepts any real AI tool — product, framework, library, or
+        model. Listings must be live, publicly accessible, and honestly
+        described. We especially welcome tools that align with the Nano
+        Collective's values: open source, local-first, and privacy-respecting
+        — those are eligible for a Recommended badge from our curators.
+
+        **Not accepted:** affiliate or tracking links, self-promotional spam,
+        duplicates, vaporware, or listings that misrepresent what a tool does.
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      description: The tool's name as it should appear on nanolist.
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: URL
+      description: The tool's homepage.
+      placeholder: "https://"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: 10–300 characters, plain text.
+    validations:
+      required: true
+  - type: input
+    id: author
+    attributes:
+      label: Author
+      description: who makes it
+    validations:
+      required: true
+  - type: dropdown
+    id: categories
+    attributes:
+      label: Categories
+      description: Pick one to three categories that fit best.
+      multiple: true
+      options:
+        - Chat Assistants
+        - Image Generation
+        - Video Generation
+        - Audio & Voice
+        - Writing
+        - Productivity
+        - Search & Knowledge
+        - Coding Assistants
+        - Agent Frameworks
+        - Open Models
+        - Local Inference
+        - LLM Libraries
+        - Evals & Observability
+        - Vector Databases
+        - Fine-tuning
+        - Model Serving
+        - Compute
+        - Learning Resources
+    validations:
+      required: true
+  - type: checkboxes
+    id: attributes
+    attributes:
+      label: Attributes
+      description: Tick every attribute that honestly applies.
+      options:
+        - label: Open source
+        - label: Local-first (runs fully on your machine)
+        - label: Privacy-first (no required cloud or telemetry)
+        - label: Self-hostable
+  - type: dropdown
+    id: pricing
+    attributes:
+      label: Pricing
+      options:
+        - free
+        - freemium
+        - paid
+        - open-source
+    validations:
+      required: true
+  - type: input
+    id: license
+    attributes:
+      label: License
+      description: SPDX id, e.g. MIT
+  - type: input
+    id: github
+    attributes:
+      label: GitHub
+      description: https://github.com/... repo

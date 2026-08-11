@@ -1,0 +1,5 @@
+# Every path requires review from the maintainers team. Combined with branch
+# protection's "Require review from Code Owners", this is the required-review
+# gate that stops automation-created submission PRs (built from hostile
+# submitter input) from merging without a human maintainer's approval.
+* @Nano-Collective/maintainers

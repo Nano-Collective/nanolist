@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Discord
+    url: https://discord.gg/ktPDV6rekE
+    about: Questions, listing help, and general discussion with the Nano Collective.
+  - name: Documentation
+    url: https://docs.nanocollective.org
+    about: Guides and documentation for Nano Collective projects.

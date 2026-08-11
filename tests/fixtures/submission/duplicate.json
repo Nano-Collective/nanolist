@@ -1,0 +1,11 @@
+{
+  "name": "Ollama Turbo Pro",
+  "url": "https://www.ollama.com/turbo",
+  "description": "A totally different product that just happens to live on a domain that is already listed on nanolist.",
+  "author": "Not Ollama Inc",
+  "categories": "Local Inference",
+  "attributes": "- [x] Open source\n- [ ] Local-first (runs fully on your machine)\n- [ ] Privacy-first (no required cloud or telemetry)\n- [ ] Self-hostable",
+  "pricing": "free",
+  "license": "",
+  "github": ""
+}

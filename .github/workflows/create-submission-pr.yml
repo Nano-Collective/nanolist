@@ -1,0 +1,278 @@
+# Turns an approved listing submission issue into a pull request.
+#
+# Maintainers comment `/approve` or `/reject` on a `listing-submission` issue.
+# Authority is verified ONLY via the GitHub collaborator-permission API —
+# never inferred from labels, comment content, or anything a user can set.
+#
+# SECURITY: everything a submitter types is hostile. Issue-derived data only
+# ever enters `run:` / github-script bodies via `env:` indirection — never via
+# `${{ }}` interpolation inside script text. The slug is the one exception
+# used in `with:` params (not shell): it is safe ONLY because the zod schema
+# regex-constrains it to kebab-case [a-z0-9-].
+name: Create submission PR
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: create-submission-pr-${{ github.event.issue.number }}
+
+jobs:
+  # Cheap gate: only maintainer /approve or /reject comments on submission
+  # issues proceed. No checkout, no code execution beyond the permission check.
+  gate:
+    if: >-
+      !github.event.issue.pull_request &&
+      contains(github.event.issue.labels.*.name, 'listing-submission') &&
+      (startsWith(github.event.comment.body, '/approve') ||
+       startsWith(github.event.comment.body, '/reject'))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      command: ${{ steps.check.outputs.command }}
+      authorized: ${{ steps.check.outputs.authorized }}
+    steps:
+      - name: Verify commenter is a maintainer
+        id: check
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const command = context.payload.comment.body.startsWith("/approve")
+              ? "approve"
+              : "reject";
+
+            // Authority comes ONLY from the collaborator permission level.
+            let authorized = false;
+            try {
+              const { data } =
+                await github.rest.repos.getCollaboratorPermissionLevel({
+                  ...context.repo,
+                  username: context.payload.comment.user.login,
+                });
+              // "maintain" reports as "write" in the legacy permission field;
+              // role_name is checked as well for completeness.
+              authorized =
+                ["admin", "write"].includes(data.permission) ||
+                ["admin", "maintain", "write"].includes(data.role_name);
+            } catch {
+              authorized = false;
+            }
+
+            core.setOutput("command", command);
+            core.setOutput("authorized", authorized ? "true" : "false");
+
+  reject:
+    needs: gate
+    if: >-
+      needs.gate.outputs.authorized == 'true' &&
+      needs.gate.outputs.command == 'reject'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Comment and close issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const issue_number = context.payload.issue.number;
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number,
+              body: "**Submission rejected** by a maintainer. Thanks anyway for the suggestion — see the submission policy in the issue form for what nanolist accepts.",
+            });
+            await github.rest.issues.update({
+              owner,
+              repo,
+              issue_number,
+              state: "closed",
+              state_reason: "not_planned",
+            });
+
+  # The issue may have been edited since it was validated — the content at
+  # approval time is authoritative, so fully re-parse and re-validate it.
+  revalidate:
+    needs: gate
+    if: >-
+      needs.gate.outputs.authorized == 'true' &&
+      needs.gate.outputs.command == 'approve'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up PNPM
+        uses: pnpm/action-setup@v4
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Parse issue form
+        id: parser
+        uses: stefanbuck/github-issue-parser@v3
+        with:
+          template-path: .github/ISSUE_TEMPLATE/submit-listing.yml
+          issue-body: ${{ github.event.issue.body }}
+
+      - name: Re-validate submission
+        env:
+          # Hostile data enters ONLY through env vars, never `${{ }}` in `run:`.
+          PARSED_ISSUE: ${{ steps.parser.outputs.jsonString }}
+          SUBMITTED_BY: ${{ github.event.issue.user.login }}
+        run: |
+          set -o pipefail
+          export TODAY="$(date -u +%Y-%m-%d)"
+          pnpm exec tsx scripts/parse-submission.ts | tail -n 1
+
+  create-pr:
+    needs: [gate, revalidate]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      pr_url: ${{ steps.cpr.outputs.pull-request-url }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up PNPM
+        uses: pnpm/action-setup@v4
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Parse issue form
+        id: parser
+        uses: stefanbuck/github-issue-parser@v3
+        with:
+          template-path: .github/ISSUE_TEMPLATE/submit-listing.yml
+          issue-body: ${{ github.event.issue.body }}
+
+      - name: Write listing file
+        id: write
+        env:
+          # Hostile data enters ONLY through env vars, never `${{ }}` in `run:`.
+          PARSED_ISSUE: ${{ steps.parser.outputs.jsonString }}
+          SUBMITTED_BY: ${{ github.event.issue.user.login }}
+        run: |
+          set -o pipefail
+          export TODAY="$(date -u +%Y-%m-%d)"
+          RESULT="$(pnpm exec tsx scripts/parse-submission.ts --write | tail -n 1)"
+          SLUG="$(printf '%s' "$RESULT" | jq -r '.slug')"
+          # Defense in depth: the slug is already regex-constrained to
+          # kebab-case by the zod schema; re-check before exporting it.
+          case "$SLUG" in
+            *[!a-z0-9-]* | "")
+              echo "unexpected slug from parser" >&2
+              exit 1
+              ;;
+          esac
+          echo "slug=$SLUG" >> "$GITHUB_OUTPUT"
+
+      - name: Fetch icon (best effort)
+        # scripts/fetch-icons.ts may not exist yet; the icon is optional.
+        continue-on-error: true
+        env:
+          SLUG: ${{ steps.write.outputs.slug }}
+        run: |
+          if [ -f scripts/fetch-icons.ts ]; then
+            pnpm exec tsx scripts/fetch-icons.ts --slug "$SLUG"
+          else
+            echo "scripts/fetch-icons.ts not present; skipping icon fetch"
+          fi
+
+      # NANOLIST_BOT_TOKEN is a fine-grained PAT scoped to this repository
+      # only, with contents + pull-requests write. Using it means the PRs the
+      # bot opens still trigger the pr-checks workflow (events created with
+      # the default github.token do NOT trigger further workflows). If the
+      # secret is unset we fall back to github.token: the PR is still created
+      # but shows no checks — reviewers must then rely on branch protection's
+      # required checks blocking merge until they are manually re-run.
+      - name: Create pull request
+        id: cpr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.NANOLIST_BOT_TOKEN || github.token }}
+          branch: submission/issue-${{ github.event.issue.number }}
+          delete-branch: true
+          add-paths: |
+            data/listings/*.json
+            public/icons/**
+          # The slug below is validated-safe ONLY because listingSchema
+          # regex-constrains it to kebab-case; the submitter login charset is
+          # constrained by GitHub itself. These are `with:` params (env-passed
+          # to the action), not shell interpolation.
+          commit-message: "feat: add listing ${{ steps.write.outputs.slug }}"
+          title: "Add listing: ${{ steps.write.outputs.slug }}"
+          body: |
+            Adds `data/listings/${{ steps.write.outputs.slug }}.json` from an approved listing submission.
+
+            - Submitted by: @${{ github.event.issue.user.login }}
+            - Closes #${{ github.event.issue.number }}
+
+            ## Reviewer checklist
+
+            - [ ] Link works and matches the description
+            - [ ] Not spam or a duplicate
+            - [ ] Attribute flags (open source / local-first / privacy-first / self-hostable) are honest
+            - [ ] Icon looks right (or is absent)
+          labels: listing-submission
+
+  notify:
+    needs: [gate, revalidate, create-pr]
+    if: >-
+      always() &&
+      needs.gate.outputs.authorized == 'true' &&
+      needs.gate.outputs.command == 'approve'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Comment outcome on the issue
+        uses: actions/github-script@v7
+        env:
+          PR_URL: ${{ needs.create-pr.outputs.pr_url }}
+          REVALIDATE_RESULT: ${{ needs.revalidate.result }}
+          CREATE_PR_RESULT: ${{ needs.create-pr.result }}
+        with:
+          script: |
+            const prUrl = process.env.PR_URL;
+            let body;
+            if (process.env.CREATE_PR_RESULT === "success" && prUrl) {
+              body =
+                "**Approved.** A pull request with this listing has been opened: " +
+                prUrl +
+                "\n\nThe issue will close automatically when the PR merges.";
+            } else if (process.env.REVALIDATE_RESULT !== "success") {
+              body =
+                "**Approval failed:** the submission no longer passes validation (the issue may have been edited since it was validated). Edit the issue to fix it, wait for validation to pass, then approve again.";
+            } else {
+              body =
+                "**Approval failed:** the pull request could not be created. A maintainer should check the workflow run logs.";
+            }
+            await github.rest.issues.createComment({
+              ...context.repo,
+              issue_number: context.payload.issue.number,
+              body,
+            });
