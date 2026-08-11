@@ -8,18 +8,6 @@
     "lib/listings.ts",
     "lib/utils.ts"
   ],
-  "ignoreDependencies": [
-    "@radix-ui/react-dialog",
-    "@radix-ui/react-select",
-    "@radix-ui/react-slot",
-    "class-variance-authority",
-    "feed",
-    "framer-motion",
-    "fuse.js",
-    "lucide-react",
-    "react-icons",
-    "turndown"
-  ],
   "rules": {
     "files": "error",
     "dependencies": "error",
