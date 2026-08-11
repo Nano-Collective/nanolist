@@ -1,0 +1,23 @@
+{
+  "slug": "anythingllm",
+  "name": "AnythingLLM",
+  "description": "All-in-one desktop and server application for private AI chat over your documents. Built-in RAG, agents and multi-user support; works with local models via Ollama or with cloud providers.",
+  "url": "https://anythingllm.com",
+  "author": "Mintplex Labs",
+  "categories": ["search-knowledge", "chat-assistants"],
+  "tags": ["rag", "desktop-app", "self-hosted", "ollama", "documents"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": true,
+    "selfHostable": true
+  },
+  "pricing": "open-source",
+  "license": "MIT",
+  "github": "https://github.com/Mintplex-Labs/anything-llm",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

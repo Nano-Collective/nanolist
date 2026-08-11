@@ -1,0 +1,23 @@
+{
+  "slug": "meta-llama",
+  "name": "Meta Llama",
+  "description": "Meta's family of open-weight language models, from small on-device sizes to large frontier models. Weights are freely downloadable under the Llama Community License, which carries some usage restrictions.",
+  "url": "https://www.llama.com",
+  "author": "Meta",
+  "categories": ["open-models"],
+  "tags": ["open-weights", "llm", "on-device", "foundation-models"],
+  "attributes": {
+    "openSource": false,
+    "localFirst": true,
+    "privacyFirst": true,
+    "selfHostable": true
+  },
+  "pricing": "free",
+  "license": null,
+  "github": "https://github.com/meta-llama/llama-models",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

@@ -1,0 +1,23 @@
+{
+  "slug": "llama-index",
+  "name": "LlamaIndex",
+  "description": "Data framework for connecting LLMs to your own data. Document loaders, indexes and query engines for building RAG pipelines and document agents in Python and TypeScript.",
+  "url": "https://www.llamaindex.ai",
+  "author": "LlamaIndex",
+  "categories": ["llm-libraries", "search-knowledge"],
+  "tags": ["rag", "python", "typescript", "document-parsing", "agents"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": false,
+    "selfHostable": true
+  },
+  "pricing": "open-source",
+  "license": "MIT",
+  "github": "https://github.com/run-llama/llama_index",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

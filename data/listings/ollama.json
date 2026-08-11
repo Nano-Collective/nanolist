@@ -1,0 +1,23 @@
+{
+  "slug": "ollama",
+  "name": "Ollama",
+  "description": "Run open large language models locally with a simple CLI and REST API. One-line installs for Llama, Qwen, Gemma, DeepSeek and hundreds of other models on macOS, Linux and Windows.",
+  "url": "https://ollama.com",
+  "author": "Ollama",
+  "categories": ["local-inference"],
+  "tags": ["llm", "cli", "self-hosted", "gguf"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": true,
+    "selfHostable": true
+  },
+  "pricing": "open-source",
+  "license": "MIT",
+  "github": "https://github.com/ollama/ollama",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

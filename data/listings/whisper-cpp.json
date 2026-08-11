@@ -1,0 +1,23 @@
+{
+  "slug": "whisper-cpp",
+  "name": "whisper.cpp",
+  "description": "Port of OpenAI's Whisper speech recognition model in plain C/C++. Fast offline transcription on CPU and Apple Silicon with no Python dependency; widely embedded in local dictation and transcription apps.",
+  "url": "https://github.com/ggml-org/whisper.cpp",
+  "author": "ggml-org (Georgi Gerganov)",
+  "categories": ["audio-voice", "local-inference"],
+  "tags": ["speech-to-text", "cpp", "offline", "whisper"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": true,
+    "selfHostable": true
+  },
+  "pricing": "open-source",
+  "license": "MIT",
+  "github": "https://github.com/ggml-org/whisper.cpp",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

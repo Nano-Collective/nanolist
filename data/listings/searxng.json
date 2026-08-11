@@ -1,0 +1,23 @@
+{
+  "slug": "searxng",
+  "name": "SearXNG",
+  "description": "Free, self-hostable internet metasearch engine that aggregates results from many search services without tracking or profiling users. A common private search backend for local AI stacks.",
+  "url": "https://docs.searxng.org",
+  "author": "SearXNG community",
+  "categories": ["search-knowledge"],
+  "tags": ["metasearch", "privacy", "self-hosted", "python", "docker"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": true,
+    "selfHostable": true
+  },
+  "pricing": "open-source",
+  "license": "AGPL-3.0",
+  "github": "https://github.com/searxng/searxng",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

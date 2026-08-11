@@ -1,0 +1,23 @@
+{
+  "slug": "claude",
+  "name": "Claude",
+  "description": "Anthropic's AI assistant for chat, analysis and coding, available on web, desktop and mobile alongside a developer API. Proprietary cloud service; conversations are processed on Anthropic's servers.",
+  "url": "https://claude.ai",
+  "author": "Anthropic",
+  "categories": ["chat-assistants", "coding-assistants"],
+  "tags": ["proprietary", "cloud", "chatbot", "api"],
+  "attributes": {
+    "openSource": false,
+    "localFirst": false,
+    "privacyFirst": false,
+    "selfHostable": false
+  },
+  "pricing": "freemium",
+  "license": null,
+  "github": null,
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

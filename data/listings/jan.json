@@ -1,0 +1,23 @@
+{
+  "slug": "jan",
+  "name": "Jan",
+  "description": "Open-source ChatGPT alternative that runs 100 percent offline on your computer. Desktop app for downloading and chatting with local models, with optional connections to cloud providers.",
+  "url": "https://jan.ai",
+  "author": "Menlo Research",
+  "categories": ["chat-assistants", "local-inference"],
+  "tags": ["desktop-app", "local-llm", "offline", "self-hosted"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": true,
+    "selfHostable": true
+  },
+  "pricing": "open-source",
+  "license": "Apache-2.0",
+  "github": "https://github.com/janhq/jan",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

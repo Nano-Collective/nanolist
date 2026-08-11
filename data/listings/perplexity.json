@@ -1,0 +1,23 @@
+{
+  "slug": "perplexity",
+  "name": "Perplexity",
+  "description": "AI-powered answer engine that combines web search with LLM summarisation and cited sources. Proprietary cloud service with free and paid tiers.",
+  "url": "https://www.perplexity.ai",
+  "author": "Perplexity AI",
+  "categories": ["search-knowledge"],
+  "tags": ["proprietary", "cloud", "search", "citations"],
+  "attributes": {
+    "openSource": false,
+    "localFirst": false,
+    "privacyFirst": false,
+    "selfHostable": false
+  },
+  "pricing": "freemium",
+  "license": null,
+  "github": null,
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

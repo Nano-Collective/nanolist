@@ -1,0 +1,23 @@
+{
+  "slug": "prompt-scrubber",
+  "name": "prompt-scrubber",
+  "description": "Local-first utility that strips identifying content — emails, secrets, file paths, URLs, phone numbers — from prompts before they reach a cloud LLM, mapping each value to a stable placeholder so responses can be rehydrated locally.",
+  "url": "https://github.com/Nano-Collective/prompt-scrubber",
+  "author": "Nano Collective",
+  "categories": ["llm-libraries"],
+  "tags": ["privacy", "pii", "prompts", "cli", "typescript"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": true,
+    "selfHostable": true
+  },
+  "pricing": "open-source",
+  "license": "MIT",
+  "github": "https://github.com/Nano-Collective/prompt-scrubber",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": "2026-08-11",
+  "status": "active"
+}

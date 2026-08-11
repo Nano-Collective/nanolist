@@ -1,0 +1,29 @@
+{
+  "slug": "vllm",
+  "name": "vLLM",
+  "description": "High-throughput, memory-efficient inference and serving engine for LLMs. Uses PagedAttention and continuous batching to serve open models at scale behind an OpenAI-compatible API.",
+  "url": "https://docs.vllm.ai",
+  "author": "vLLM Project",
+  "categories": ["model-serving", "local-inference"],
+  "tags": [
+    "python",
+    "gpu",
+    "inference-server",
+    "openai-compatible",
+    "self-hosted"
+  ],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": true,
+    "selfHostable": true
+  },
+  "pricing": "open-source",
+  "license": "Apache-2.0",
+  "github": "https://github.com/vllm-project/vllm",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

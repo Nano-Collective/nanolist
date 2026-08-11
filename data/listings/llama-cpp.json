@@ -1,0 +1,23 @@
+{
+  "slug": "llama-cpp",
+  "name": "llama.cpp",
+  "description": "LLM inference engine in C/C++ with minimal dependencies. Runs quantized GGUF models on CPU and GPU across Apple Silicon, x86 and CUDA, and powers many local AI applications.",
+  "url": "https://github.com/ggml-org/llama.cpp",
+  "author": "ggml-org (Georgi Gerganov)",
+  "categories": ["local-inference", "llm-libraries"],
+  "tags": ["cpp", "gguf", "quantization", "cpu-inference", "llm"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": true,
+    "selfHostable": true
+  },
+  "pricing": "open-source",
+  "license": "MIT",
+  "github": "https://github.com/ggml-org/llama.cpp",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

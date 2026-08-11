@@ -1,0 +1,23 @@
+{
+  "slug": "langchain",
+  "name": "LangChain",
+  "description": "Framework for developing applications powered by LLMs. Provides agent orchestration, tool calling, memory and integrations with hundreds of model providers and data sources in Python and JavaScript.",
+  "url": "https://www.langchain.com",
+  "author": "LangChain",
+  "categories": ["agent-frameworks", "llm-libraries"],
+  "tags": ["python", "typescript", "agents", "rag", "orchestration"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": false,
+    "selfHostable": true
+  },
+  "pricing": "open-source",
+  "license": "MIT",
+  "github": "https://github.com/langchain-ai/langchain",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

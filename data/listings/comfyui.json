@@ -1,0 +1,23 @@
+{
+  "slug": "comfyui",
+  "name": "ComfyUI",
+  "description": "Node-based graphical interface for diffusion models. Build image and video generation pipelines as visual graphs, with support for Stable Diffusion, Flux and a large ecosystem of community custom nodes.",
+  "url": "https://www.comfy.org",
+  "author": "Comfy Org",
+  "categories": ["image-generation", "video-generation"],
+  "tags": ["stable-diffusion", "node-editor", "self-hosted", "python", "gpu"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": true,
+    "selfHostable": true
+  },
+  "pricing": "open-source",
+  "license": "GPL-3.0",
+  "github": "https://github.com/comfyanonymous/ComfyUI",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

@@ -1,0 +1,23 @@
+{
+  "slug": "axolotl",
+  "name": "Axolotl",
+  "description": "Tool for fine-tuning open LLMs, supporting full fine-tunes, LoRA, QLoRA and preference-tuning techniques across many model families, configured through simple YAML files.",
+  "url": "https://docs.axolotl.ai",
+  "author": "Axolotl AI",
+  "categories": ["fine-tuning"],
+  "tags": ["python", "lora", "qlora", "training", "gpu"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": true,
+    "selfHostable": true
+  },
+  "pricing": "open-source",
+  "license": "Apache-2.0",
+  "github": "https://github.com/axolotl-ai-cloud/axolotl",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

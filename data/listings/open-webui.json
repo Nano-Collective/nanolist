@@ -1,0 +1,23 @@
+{
+  "slug": "open-webui",
+  "name": "Open WebUI",
+  "description": "Self-hosted web interface for AI chat that works with Ollama and OpenAI-compatible APIs. Supports RAG, web search, image generation and multi-user setups, and is designed to operate fully offline.",
+  "url": "https://openwebui.com",
+  "author": "Open WebUI",
+  "categories": ["chat-assistants"],
+  "tags": ["self-hosted", "web-ui", "ollama", "rag", "docker"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": true,
+    "selfHostable": true
+  },
+  "pricing": "open-source",
+  "license": null,
+  "github": "https://github.com/open-webui/open-webui",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

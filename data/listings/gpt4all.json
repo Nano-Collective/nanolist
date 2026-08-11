@@ -1,0 +1,23 @@
+{
+  "slug": "gpt4all",
+  "name": "GPT4All",
+  "description": "Desktop application from Nomic for running open LLMs locally on consumer hardware, with private chat and LocalDocs for asking questions about your own files without data leaving your machine.",
+  "url": "https://nomic.ai/gpt4all",
+  "author": "Nomic AI",
+  "categories": ["chat-assistants", "local-inference"],
+  "tags": ["desktop-app", "local-llm", "offline", "rag"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": true,
+    "selfHostable": false
+  },
+  "pricing": "open-source",
+  "license": "MIT",
+  "github": "https://github.com/nomic-ai/gpt4all",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

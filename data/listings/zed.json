@@ -1,0 +1,23 @@
+{
+  "slug": "zed",
+  "name": "Zed",
+  "description": "High-performance, open-source code editor written in Rust with built-in AI features, multiplayer collaboration and agentic editing. AI features can use cloud providers or local models via Ollama.",
+  "url": "https://zed.dev",
+  "author": "Zed Industries",
+  "categories": ["productivity", "coding-assistants"],
+  "tags": ["editor", "rust", "desktop-app", "collaboration"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": false,
+    "selfHostable": false
+  },
+  "pricing": "open-source",
+  "license": "GPL-3.0",
+  "github": "https://github.com/zed-industries/zed",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

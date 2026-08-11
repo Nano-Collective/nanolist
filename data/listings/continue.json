@@ -1,0 +1,23 @@
+{
+  "slug": "continue",
+  "name": "Continue",
+  "description": "Open-source coding agent for VS Code and JetBrains. Chat, autocomplete and edit with any model — cloud APIs or local models via Ollama — configured through shareable blocks.",
+  "url": "https://continue.dev",
+  "author": "Continue",
+  "categories": ["coding-assistants"],
+  "tags": ["vscode", "jetbrains", "coding-agent", "local-llm", "open-source"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": false,
+    "selfHostable": false
+  },
+  "pricing": "open-source",
+  "license": "Apache-2.0",
+  "github": "https://github.com/continuedev/continue",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

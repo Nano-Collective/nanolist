@@ -1,0 +1,23 @@
+{
+  "slug": "langfuse",
+  "name": "Langfuse",
+  "description": "Open-source LLM engineering platform for tracing, evals, prompt management and metrics, with OpenTelemetry-based observability. Self-hostable; the core is MIT-licensed with paid enterprise features.",
+  "url": "https://langfuse.com",
+  "author": "Langfuse",
+  "categories": ["evals-observability"],
+  "tags": ["observability", "tracing", "evals", "self-hosted", "typescript"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": false,
+    "selfHostable": true
+  },
+  "pricing": "open-source",
+  "license": "MIT",
+  "github": "https://github.com/langfuse/langfuse",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

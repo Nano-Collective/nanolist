@@ -1,0 +1,23 @@
+{
+  "slug": "aider",
+  "name": "Aider",
+  "description": "AI pair programming in your terminal. Edits code in your local git repository via chat, works with Claude, GPT and local models, and automatically commits changes with sensible messages.",
+  "url": "https://aider.chat",
+  "author": "Aider AI",
+  "categories": ["coding-assistants"],
+  "tags": ["cli", "coding-agent", "git", "python", "pair-programming"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": false,
+    "selfHostable": false
+  },
+  "pricing": "open-source",
+  "license": "Apache-2.0",
+  "github": "https://github.com/Aider-AI/aider",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

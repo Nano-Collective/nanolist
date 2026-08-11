@@ -1,0 +1,23 @@
+{
+  "slug": "qdrant",
+  "name": "Qdrant",
+  "description": "High-performance vector database and similarity search engine written in Rust. Stores embeddings with payload filtering, hybrid search and quantization; runs as a single binary, in Docker, or as a managed cloud.",
+  "url": "https://qdrant.tech",
+  "author": "Qdrant",
+  "categories": ["vector-databases"],
+  "tags": ["rust", "vector-search", "embeddings", "self-hosted", "docker"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": true,
+    "selfHostable": true
+  },
+  "pricing": "open-source",
+  "license": "Apache-2.0",
+  "github": "https://github.com/qdrant/qdrant",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

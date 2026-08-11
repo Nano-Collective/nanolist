@@ -1,0 +1,23 @@
+{
+  "slug": "get-md",
+  "name": "get-md",
+  "description": "Fast, lightweight HTML, PDF, DOCX and Markdown to Markdown converter optimised for LLM consumption. Converts files or URLs in under 100ms, with optional AI-powered conversion using a local model. Library and CLI.",
+  "url": "https://github.com/Nano-Collective/get-md",
+  "author": "Nano Collective",
+  "categories": ["llm-libraries"],
+  "tags": ["markdown", "html", "pdf", "converter", "typescript", "cli"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": true,
+    "selfHostable": true
+  },
+  "pricing": "open-source",
+  "license": "MIT",
+  "github": "https://github.com/Nano-Collective/get-md",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": "2026-08-11",
+  "status": "active"
+}

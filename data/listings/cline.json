@@ -1,0 +1,23 @@
+{
+  "slug": "cline",
+  "name": "Cline",
+  "description": "Autonomous coding agent available as a VS Code extension, CLI and SDK. Plans and executes multi-step coding tasks with human-in-the-loop approval of file edits and terminal commands; bring your own model keys.",
+  "url": "https://cline.bot",
+  "author": "Cline",
+  "categories": ["coding-assistants"],
+  "tags": ["vscode", "coding-agent", "byok", "typescript"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": false,
+    "selfHostable": false
+  },
+  "pricing": "open-source",
+  "license": "Apache-2.0",
+  "github": "https://github.com/cline/cline",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

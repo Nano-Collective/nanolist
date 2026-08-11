@@ -1,0 +1,29 @@
+{
+  "slug": "sentinel",
+  "name": "Sentinel",
+  "description": "Installable, Nanocoder-driven workflow that runs continuous, configurable security and code audits across the repositories in a GitHub organisation and files findings as issues. Local models are a first-class path.",
+  "url": "https://github.com/Nano-Collective/sentinel",
+  "author": "Nano Collective",
+  "categories": ["evals-observability"],
+  "tags": [
+    "security",
+    "code-audit",
+    "github-actions",
+    "automation",
+    "local-llm"
+  ],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": true,
+    "selfHostable": true
+  },
+  "pricing": "open-source",
+  "license": "MIT",
+  "github": "https://github.com/Nano-Collective/sentinel",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": "2026-08-11",
+  "status": "active"
+}

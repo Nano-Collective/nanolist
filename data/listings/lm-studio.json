@@ -1,0 +1,23 @@
+{
+  "slug": "lm-studio",
+  "name": "LM Studio",
+  "description": "Desktop app for discovering, downloading and running local LLMs such as Llama, Qwen and Gemma. Includes a chat interface and an OpenAI-compatible local server. Free to use but not open source.",
+  "url": "https://lmstudio.ai",
+  "author": "LM Studio",
+  "categories": ["local-inference", "chat-assistants"],
+  "tags": ["desktop-app", "local-llm", "gguf", "mlx", "proprietary"],
+  "attributes": {
+    "openSource": false,
+    "localFirst": true,
+    "privacyFirst": true,
+    "selfHostable": false
+  },
+  "pricing": "free",
+  "license": null,
+  "github": null,
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

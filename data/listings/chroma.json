@@ -1,0 +1,23 @@
+{
+  "slug": "chroma",
+  "name": "Chroma",
+  "description": "Open-source embedding database for AI applications. Simple API for storing documents, embeddings and metadata with vector and full-text search; runs in-process for prototyping or as a server.",
+  "url": "https://www.trychroma.com",
+  "author": "Chroma",
+  "categories": ["vector-databases"],
+  "tags": ["python", "embeddings", "vector-search", "rag", "self-hosted"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": true,
+    "selfHostable": true
+  },
+  "pricing": "open-source",
+  "license": "Apache-2.0",
+  "github": "https://github.com/chroma-core/chroma",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

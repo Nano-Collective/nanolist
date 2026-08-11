@@ -1,0 +1,23 @@
+{
+  "slug": "transformers",
+  "name": "Hugging Face Transformers",
+  "description": "Hugging Face's model-definition library for state-of-the-art transformer models in text, vision and audio. Load thousands of pretrained open models for local inference or training in PyTorch.",
+  "url": "https://huggingface.co/docs/transformers",
+  "author": "Hugging Face",
+  "categories": ["llm-libraries", "open-models"],
+  "tags": ["python", "pytorch", "pretrained-models", "nlp", "machine-learning"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": true,
+    "selfHostable": true
+  },
+  "pricing": "open-source",
+  "license": "Apache-2.0",
+  "github": "https://github.com/huggingface/transformers",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

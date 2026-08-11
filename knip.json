@@ -1,0 +1,38 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "ignoreExportsUsedInFile": true,
+  "entry": [
+    "functions/**/*.js",
+    "scripts/**/*.{ts,mjs,js}",
+    "lib/schema.ts",
+    "lib/listings.ts",
+    "lib/utils.ts"
+  ],
+  "ignoreDependencies": [
+    "@radix-ui/react-dialog",
+    "@radix-ui/react-select",
+    "@radix-ui/react-slot",
+    "class-variance-authority",
+    "feed",
+    "framer-motion",
+    "fuse.js",
+    "lucide-react",
+    "react-icons",
+    "turndown"
+  ],
+  "rules": {
+    "files": "error",
+    "dependencies": "error",
+    "devDependencies": "error",
+    "optionalPeerDependencies": "error",
+    "unlisted": "error",
+    "unresolved": "error",
+    "binaries": "error",
+    "exports": "warn",
+    "types": "warn",
+    "nsExports": "warn",
+    "nsTypes": "warn",
+    "enumMembers": "warn",
+    "duplicates": "warn"
+  }
+}

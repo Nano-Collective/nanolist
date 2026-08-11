@@ -1,0 +1,23 @@
+{
+  "slug": "piper",
+  "name": "Piper",
+  "description": "Fast, local neural text-to-speech engine that runs well on modest hardware such as the Raspberry Pi. Offers many voices across dozens of languages and is maintained under the Open Home Foundation.",
+  "url": "https://github.com/OHF-Voice/piper1-gpl",
+  "author": "Open Home Foundation",
+  "categories": ["audio-voice"],
+  "tags": ["text-to-speech", "offline", "raspberry-pi", "python"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": true,
+    "selfHostable": true
+  },
+  "pricing": "open-source",
+  "license": "GPL-3.0",
+  "github": "https://github.com/OHF-Voice/piper1-gpl",
+  "icon": null,
+  "submittedBy": null,
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}

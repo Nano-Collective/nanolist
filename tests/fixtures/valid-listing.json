@@ -1,0 +1,23 @@
+{
+  "slug": "example-tool",
+  "name": "Example Tool",
+  "description": "A fake example listing used as a known-good fixture for smoke-testing the schema.",
+  "url": "https://example.com",
+  "author": "Example Org",
+  "categories": ["chat-assistants", "local-inference"],
+  "tags": ["open-source", "local-first"],
+  "attributes": {
+    "openSource": true,
+    "localFirst": true,
+    "privacyFirst": true,
+    "selfHostable": true
+  },
+  "pricing": "open-source",
+  "license": "MIT",
+  "github": "https://github.com/example/example-tool",
+  "icon": "/icons/example-tool.png",
+  "submittedBy": "example-user",
+  "addedAt": "2026-08-11",
+  "recommendedAt": null,
+  "status": "active"
+}
