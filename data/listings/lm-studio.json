@@ -5,7 +5,7 @@
   "url": "https://lmstudio.ai",
   "author": "LM Studio",
   "categories": ["local-inference", "chat-assistants"],
-  "tags": ["desktop-app", "local-llm", "gguf", "mlx", "proprietary"],
+  "tags": ["desktop-app", "local-llm", "gguf", "mlx"],
   "attributes": {
     "openSource": false,
     "localFirst": true,

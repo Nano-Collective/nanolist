@@ -5,7 +5,7 @@
   "url": "https://qdrant.tech",
   "author": "Qdrant",
   "categories": ["vector-databases"],
-  "tags": ["rust", "vector-search", "embeddings", "self-hosted", "docker"],
+  "tags": ["rust", "vector-search", "embeddings", "docker"],
   "attributes": {
     "openSource": true,
     "localFirst": true,

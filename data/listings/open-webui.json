@@ -5,7 +5,7 @@
   "url": "https://openwebui.com",
   "author": "Open WebUI",
   "categories": ["chat-assistants"],
-  "tags": ["self-hosted", "web-ui", "ollama", "rag", "docker"],
+  "tags": ["web-ui", "ollama", "rag", "docker"],
   "attributes": {
     "openSource": true,
     "localFirst": true,

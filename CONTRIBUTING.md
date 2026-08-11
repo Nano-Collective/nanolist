@@ -44,7 +44,7 @@ Listings are one JSON file each in `data/listings/`, validated by `lib/schema.ts
 - **New listings** should go through the submission pipeline — the [issue form](https://github.com/Nano-Collective/nanolist/issues/new?template=submit-listing.yml) — rather than a direct PR. That keeps validation, approval, and provenance in one place. See [docs/submitting.md](docs/submitting.md).
 - **Corrections** (fixing a URL, updating a description, correcting attributes) are welcome as direct PRs editing the relevant `data/listings/<slug>.json`. They must pass `pnpm validate`.
 
-The taxonomy lives in `data/categories.json` (18 categories in 9 groups). Changes to it are structural, not editorial — raise an issue first.
+The taxonomy lives in `data/taxonomy.json` (18 categories in 9 groups, plus the accepted tag list). Changes to it are structural, not editorial — raise an issue first.
 
 The `recommendedAt` field is set by curators only; PRs adding it to your own submission will be declined.
 

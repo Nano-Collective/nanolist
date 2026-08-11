@@ -12,7 +12,8 @@
     "format": "biome format --write",
     "types": "tsc --noEmit",
     "knip": "knip",
-    "validate": "tsx scripts/validate-listings.ts",
+    "validate": "tsx scripts/validate-listings.ts && tsx scripts/generate-issue-template.ts --check",
+    "generate:issue-template": "tsx scripts/generate-issue-template.ts",
     "fetch-icons": "tsx scripts/fetch-icons.ts",
     "test:all": "pnpm run types && pnpm run lint && pnpm run knip && pnpm run validate",
     "parse-submission": "tsx scripts/parse-submission.ts"

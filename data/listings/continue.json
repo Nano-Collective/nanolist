@@ -5,7 +5,7 @@
   "url": "https://continue.dev",
   "author": "Continue",
   "categories": ["coding-assistants"],
-  "tags": ["vscode", "jetbrains", "coding-agent", "local-llm", "open-source"],
+  "tags": ["vscode", "jetbrains", "coding-agent", "local-llm"],
   "attributes": {
     "openSource": true,
     "localFirst": true,

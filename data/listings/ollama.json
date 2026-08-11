@@ -5,7 +5,7 @@
   "url": "https://ollama.com",
   "author": "Ollama",
   "categories": ["local-inference"],
-  "tags": ["llm", "cli", "self-hosted", "gguf"],
+  "tags": ["llm", "cli", "gguf"],
   "attributes": {
     "openSource": true,
     "localFirst": true,

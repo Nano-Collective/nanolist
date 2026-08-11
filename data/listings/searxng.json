@@ -5,7 +5,7 @@
   "url": "https://docs.searxng.org",
   "author": "SearXNG community",
   "categories": ["search-knowledge"],
-  "tags": ["metasearch", "privacy", "self-hosted", "python", "docker"],
+  "tags": ["metasearch", "python", "docker"],
   "attributes": {
     "openSource": true,
     "localFirst": true,

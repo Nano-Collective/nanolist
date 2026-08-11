@@ -1,28 +1,16 @@
 import { z } from "zod";
+import taxonomy from "@/data/taxonomy.json";
 
-export const CATEGORY_KEYS = [
-  "chat-assistants",
-  "image-generation",
-  "video-generation",
-  "audio-voice",
-  "writing",
-  "productivity",
-  "search-knowledge",
-  "coding-assistants",
-  "agent-frameworks",
-  "open-models",
-  "local-inference",
-  "llm-libraries",
-  "evals-observability",
-  "vector-databases",
-  "fine-tuning",
-  "model-serving",
-  "compute",
-  "learning-resources",
-] as const;
+// data/taxonomy.json is the single source of truth for accepted categories
+// and tags. Everything here is derived from it.
+export const CATEGORY_KEYS = taxonomy.categories.map(
+  (category) => category.key,
+) as [string, ...string[]];
 
 export const categoryKeySchema = z.enum(CATEGORY_KEYS);
 export type CategoryKey = z.infer<typeof categoryKeySchema>;
+
+export const tagSchema = z.enum(taxonomy.tags as [string, ...string[]]);
 
 export const categorySchema = z.object({
   key: categoryKeySchema,
@@ -87,7 +75,7 @@ export const listingSchema = z
     }),
     author: z.string().min(1).max(80),
     categories: z.array(categoryKeySchema).min(1).max(3),
-    tags: z.array(z.string().regex(KEBAB_CASE)).max(8).default([]),
+    tags: z.array(tagSchema).max(8).default([]),
     attributes: z.object({
       openSource: z.boolean(),
       localFirst: z.boolean(),

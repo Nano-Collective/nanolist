@@ -5,7 +5,7 @@
   "url": "https://www.trychroma.com",
   "author": "Chroma",
   "categories": ["vector-databases"],
-  "tags": ["python", "embeddings", "vector-search", "rag", "self-hosted"],
+  "tags": ["python", "embeddings", "vector-search", "rag"],
   "attributes": {
     "openSource": true,
     "localFirst": true,

@@ -5,7 +5,7 @@
   "url": "https://anythingllm.com",
   "author": "Mintplex Labs",
   "categories": ["search-knowledge", "chat-assistants"],
-  "tags": ["rag", "desktop-app", "self-hosted", "ollama", "documents"],
+  "tags": ["rag", "desktop-app", "ollama", "documents"],
   "attributes": {
     "openSource": true,
     "localFirst": true,

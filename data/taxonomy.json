@@ -1,0 +1,190 @@
+{
+  "categories": [
+    {
+      "key": "chat-assistants",
+      "name": "Chat Assistants",
+      "group": "Assistants & Chat",
+      "description": "General-purpose AI chat assistants and conversational interfaces."
+    },
+    {
+      "key": "image-generation",
+      "name": "Image Generation",
+      "group": "Media Generation",
+      "description": "Tools that create or edit images from text prompts and references."
+    },
+    {
+      "key": "video-generation",
+      "name": "Video Generation",
+      "group": "Media Generation",
+      "description": "Tools that generate or transform video with AI."
+    },
+    {
+      "key": "audio-voice",
+      "name": "Audio & Voice",
+      "group": "Media Generation",
+      "description": "Speech synthesis, transcription, music, and other AI audio tools."
+    },
+    {
+      "key": "writing",
+      "name": "Writing",
+      "group": "Writing & Productivity",
+      "description": "AI-assisted writing, editing, and content creation tools."
+    },
+    {
+      "key": "productivity",
+      "name": "Productivity",
+      "group": "Writing & Productivity",
+      "description": "Assistants that automate everyday tasks, notes, and workflows."
+    },
+    {
+      "key": "search-knowledge",
+      "name": "Search & Knowledge",
+      "group": "Search & Knowledge",
+      "description": "AI-powered search engines, research tools, and knowledge bases."
+    },
+    {
+      "key": "coding-assistants",
+      "name": "Coding Assistants",
+      "group": "Coding & Agents",
+      "description": "AI pair programmers, code completion, and software agents for developers."
+    },
+    {
+      "key": "agent-frameworks",
+      "name": "Agent Frameworks",
+      "group": "Coding & Agents",
+      "description": "Frameworks and toolkits for building autonomous AI agents."
+    },
+    {
+      "key": "open-models",
+      "name": "Open Models",
+      "group": "Models & Runtimes",
+      "description": "Openly licensed foundation and specialist models you can download and run."
+    },
+    {
+      "key": "local-inference",
+      "name": "Local Inference",
+      "group": "Models & Runtimes",
+      "description": "Runtimes and apps for running models locally on your own hardware."
+    },
+    {
+      "key": "llm-libraries",
+      "name": "LLM Libraries",
+      "group": "Developer Libraries",
+      "description": "SDKs and libraries for building applications on top of language models."
+    },
+    {
+      "key": "evals-observability",
+      "name": "Evals & Observability",
+      "group": "Developer Libraries",
+      "description": "Tools for evaluating, tracing, and monitoring AI systems in development and production."
+    },
+    {
+      "key": "vector-databases",
+      "name": "Vector Databases",
+      "group": "Infrastructure",
+      "description": "Databases and indexes for storing and searching embeddings."
+    },
+    {
+      "key": "fine-tuning",
+      "name": "Fine-tuning",
+      "group": "Infrastructure",
+      "description": "Platforms and tools for training and fine-tuning models on your own data."
+    },
+    {
+      "key": "model-serving",
+      "name": "Model Serving",
+      "group": "Infrastructure",
+      "description": "Inference servers and platforms for deploying models at scale."
+    },
+    {
+      "key": "compute",
+      "name": "Compute",
+      "group": "Infrastructure",
+      "description": "GPU clouds and compute marketplaces for AI workloads."
+    },
+    {
+      "key": "learning-resources",
+      "name": "Learning Resources",
+      "group": "Learning & Resources",
+      "description": "Courses, guides, and references for learning about AI."
+    }
+  ],
+  "tags": [
+    "agents",
+    "api",
+    "apple-silicon",
+    "automation",
+    "byok",
+    "chatbot",
+    "citations",
+    "cli",
+    "cloud",
+    "code-audit",
+    "coding-agent",
+    "collaboration",
+    "converter",
+    "cpp",
+    "cpu-inference",
+    "desktop-app",
+    "docker",
+    "document-parsing",
+    "documents",
+    "editor",
+    "embeddings",
+    "evals",
+    "foundation-models",
+    "gguf",
+    "git",
+    "github-actions",
+    "gpu",
+    "html",
+    "inference-server",
+    "jetbrains",
+    "json",
+    "llama-cpp",
+    "llm",
+    "local-llm",
+    "lora",
+    "machine-learning",
+    "markdown",
+    "metasearch",
+    "migrations",
+    "mlx",
+    "nlp",
+    "node-editor",
+    "observability",
+    "offline",
+    "ollama",
+    "on-device",
+    "open-weights",
+    "openai-compatible",
+    "orchestration",
+    "pair-programming",
+    "pdf",
+    "pii",
+    "pretrained-models",
+    "prompts",
+    "python",
+    "pytorch",
+    "qlora",
+    "quantization",
+    "rag",
+    "raspberry-pi",
+    "rust",
+    "search",
+    "security",
+    "small-models",
+    "speech-to-text",
+    "stable-diffusion",
+    "text-to-speech",
+    "tracing",
+    "training",
+    "type-safety",
+    "typescript",
+    "vector-search",
+    "vscode",
+    "web-ui",
+    "whisper",
+    "zod"
+  ]
+}

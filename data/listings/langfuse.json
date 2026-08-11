@@ -5,7 +5,7 @@
   "url": "https://langfuse.com",
   "author": "Langfuse",
   "categories": ["evals-observability"],
-  "tags": ["observability", "tracing", "evals", "self-hosted", "typescript"],
+  "tags": ["observability", "tracing", "evals", "typescript"],
   "attributes": {
     "openSource": true,
     "localFirst": true,

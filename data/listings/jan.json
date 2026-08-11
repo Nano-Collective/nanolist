@@ -5,7 +5,7 @@
   "url": "https://jan.ai",
   "author": "Menlo Research",
   "categories": ["chat-assistants", "local-inference"],
-  "tags": ["desktop-app", "local-llm", "offline", "self-hosted"],
+  "tags": ["desktop-app", "local-llm", "offline"],
   "attributes": {
     "openSource": true,
     "localFirst": true,

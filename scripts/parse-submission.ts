@@ -48,6 +48,7 @@ const FIELD_HINTS: Record<string, string> = {
   url: "must be a public https:// URL (no localhost or private IP ranges)",
   author: "must be 1-80 characters",
   categories: "choose between 1 and 3 of the listed categories",
+  tags: "choose up to 8 tags from the accepted tag list",
   pricing: "must be one of: free, freemium, paid, open-source",
   license: "must be an SPDX identifier of at most 40 characters",
   github: "must be an https://github.com/... URL",
@@ -166,6 +167,17 @@ function main(): void {
     }
   }
 
+  // --- Tags: optional dropdown; labels ARE the tag values -------------------
+  // Unknown tags are rejected by the shared schema (tagSchema enum) below,
+  // which reports the constant FIELD_HINTS.tags message.
+  const tags: string[] = [];
+  for (const raw of cleanValue(fields.tags).split(/[,\n]/)) {
+    const tag = raw.trim();
+    if (tag && !tags.includes(tag)) {
+      tags.push(tag);
+    }
+  }
+
   // --- Attributes: checked labels -> boolean flags --------------------------
   const attributes = {
     openSource: false,
@@ -194,7 +206,7 @@ function main(): void {
     url: cleanValue(fields.url),
     author: cleanValue(fields.author),
     categories,
-    tags: [],
+    tags,
     attributes,
     pricing: cleanValue(fields.pricing),
     license: license === "" ? null : license,

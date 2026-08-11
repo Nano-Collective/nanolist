@@ -5,7 +5,7 @@
   "url": "https://mistral.ai",
   "author": "Mistral AI",
   "categories": ["open-models"],
-  "tags": ["open-weights", "llm", "apache-2", "foundation-models"],
+  "tags": ["open-weights", "llm", "foundation-models"],
   "attributes": {
     "openSource": true,
     "localFirst": true,

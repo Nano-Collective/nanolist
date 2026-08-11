@@ -5,13 +5,7 @@
   "url": "https://docs.vllm.ai",
   "author": "vLLM Project",
   "categories": ["model-serving", "local-inference"],
-  "tags": [
-    "python",
-    "gpu",
-    "inference-server",
-    "openai-compatible",
-    "self-hosted"
-  ],
+  "tags": ["python", "gpu", "inference-server", "openai-compatible"],
   "attributes": {
     "openSource": true,
     "localFirst": true,

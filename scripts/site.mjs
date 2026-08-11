@@ -20,9 +20,9 @@ export function readListings() {
     .map((file) => JSON.parse(readFileSync(join(dir, file), "utf-8")));
 }
 
-/** All categories from data/categories.json, in file order. */
+/** All categories from data/taxonomy.json, in file order. */
 export function readCategories() {
   return JSON.parse(
-    readFileSync(join(process.cwd(), "data", "categories.json"), "utf-8"),
-  );
+    readFileSync(join(process.cwd(), "data", "taxonomy.json"), "utf-8"),
+  ).categories;
 }

@@ -5,7 +5,7 @@
   "url": "https://github.com/Nano-Collective/prompt-scrubber",
   "author": "Nano Collective",
   "categories": ["llm-libraries"],
-  "tags": ["privacy", "pii", "prompts", "cli", "typescript"],
+  "tags": ["pii", "prompts", "cli", "typescript"],
   "attributes": {
     "openSource": true,
     "localFirst": true,

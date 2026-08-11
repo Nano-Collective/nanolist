@@ -5,7 +5,7 @@
   "url": "https://claude.ai",
   "author": "Anthropic",
   "categories": ["chat-assistants", "coding-assistants"],
-  "tags": ["proprietary", "cloud", "chatbot", "api"],
+  "tags": ["cloud", "chatbot", "api"],
   "attributes": {
     "openSource": false,
     "localFirst": false,

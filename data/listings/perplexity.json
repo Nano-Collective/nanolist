@@ -5,7 +5,7 @@
   "url": "https://www.perplexity.ai",
   "author": "Perplexity AI",
   "categories": ["search-knowledge"],
-  "tags": ["proprietary", "cloud", "search", "citations"],
+  "tags": ["cloud", "search", "citations"],
   "attributes": {
     "openSource": false,
     "localFirst": false,

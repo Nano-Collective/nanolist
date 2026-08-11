@@ -21,7 +21,7 @@ Open the [listing submission form](https://github.com/Nano-Collective/nanolist/i
 - **Description** — 10–300 characters of plain text. No HTML, no Markdown, no links.
 - **Author** — the person, team, or company behind the tool.
 - **Categories** — pick 1–3 from the taxonomy (18 categories, from Chat Assistants to Local Inference to Learning Resources).
-- **Tags** — optional, lowercase-hyphenated keywords to help search.
+- **Tags** — optional, lowercase-hyphenated keywords to help search. Tags must come from the accepted list in `data/taxonomy.json`; propose new tags or categories via a normal issue or PR.
 - **Attributes** — whether the tool is open source, local-first, privacy-first, and/or self-hostable. Answer honestly; these are checked during review.
 - **Pricing** — free, freemium, paid, or open-source.
 - **License and GitHub repository** — where applicable.

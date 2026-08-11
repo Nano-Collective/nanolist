@@ -37,7 +37,7 @@ Submissions are untrusted input from arbitrary GitHub accounts, so the pipeline 
 
 ```
 data/
-  categories.json      # taxonomy: 18 categories in 9 groups
+  taxonomy.json        # taxonomy: 18 categories in 9 groups, plus accepted tags
   listings/            # one JSON file per listing
 lib/
   schema.ts            # zod schemas: the single source of truth for the data model

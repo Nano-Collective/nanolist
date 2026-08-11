@@ -12,7 +12,7 @@ import {
 } from "@/lib/schema";
 
 const LISTINGS_DIR = path.join(process.cwd(), "data", "listings");
-const CATEGORIES_FILE = path.join(process.cwd(), "data", "categories.json");
+const TAXONOMY_FILE = path.join(process.cwd(), "data", "taxonomy.json");
 
 /**
  * Reads and validates every listing in data/listings/*.json, sorted by
@@ -84,30 +84,32 @@ export function getAllListings(): Listing[] {
 }
 
 /**
- * Reads and validates data/categories.json. Asserts the category keys cover
- * CATEGORY_KEYS exactly (no missing, duplicate, or unknown keys).
+ * Reads and validates the categories in data/taxonomy.json. Asserts the
+ * on-disk category keys cover CATEGORY_KEYS (the bundled copy of the same
+ * file) exactly — no missing, duplicate, or unknown keys — which guards
+ * against a stale build running against edited data.
  */
 export function getAllCategories(): Category[] {
-  const raw: unknown = JSON.parse(fs.readFileSync(CATEGORIES_FILE, "utf8"));
-  const result = z.array(categorySchema).safeParse(raw);
+  const raw: unknown = JSON.parse(fs.readFileSync(TAXONOMY_FILE, "utf8"));
+  const result = z
+    .object({ categories: z.array(categorySchema).min(1) })
+    .safeParse(raw);
   if (!result.success) {
-    throw new Error(`categories.json: ${z.prettifyError(result.error)}`);
+    throw new Error(`taxonomy.json: ${z.prettifyError(result.error)}`);
   }
 
-  const categories = result.data;
+  const categories = result.data.categories;
   const keys = categories.map((category) => category.key);
   const keySet = new Set(keys);
   if (keySet.size !== keys.length) {
-    throw new Error("categories.json: duplicate category keys found");
+    throw new Error("taxonomy.json: duplicate category keys found");
   }
   const missing = CATEGORY_KEYS.filter((key) => !keySet.has(key));
   if (missing.length > 0) {
-    throw new Error(
-      `categories.json: missing categories: ${missing.join(", ")}`,
-    );
+    throw new Error(`taxonomy.json: missing categories: ${missing.join(", ")}`);
   }
   if (keys.length !== CATEGORY_KEYS.length) {
-    throw new Error("categories.json: contains keys outside CATEGORY_KEYS");
+    throw new Error("taxonomy.json: contains keys outside CATEGORY_KEYS");
   }
 
   return categories;

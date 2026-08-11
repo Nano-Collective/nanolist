@@ -5,7 +5,7 @@
   "url": "https://www.comfy.org",
   "author": "Comfy Org",
   "categories": ["image-generation", "video-generation"],
-  "tags": ["stable-diffusion", "node-editor", "self-hosted", "python", "gpu"],
+  "tags": ["stable-diffusion", "node-editor", "python", "gpu"],
   "attributes": {
     "openSource": true,
     "localFirst": true,
