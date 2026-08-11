@@ -1,0 +1,81 @@
+name: Submit a listing (via website form)
+description: For submissions prefilled by the website form at list.nanocollective.org/submit — values are validated automatically. Filling this out by hand? Use "Submit a listing" instead.
+title: "[Listing]: "
+labels: ["listing-submission", "via-website"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Submission policy
+
+        Nanolist accepts any real AI tool — product, framework, library, or
+        model. Listings must be live, publicly accessible, and honestly
+        described. We especially welcome tools that align with the Nano
+        Collective's values: open source, local-first, and privacy-respecting
+        — those are eligible for a Recommended badge from our curators.
+
+        **Not accepted:** affiliate or tracking links, self-promotional spam,
+        duplicates, vaporware, or listings that misrepresent what a tool does.
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      description: The tool's name as it should appear on nanolist.
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: URL
+      description: The tool's homepage.
+      placeholder: "https://"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: 10–300 characters, plain text.
+    validations:
+      required: true
+  - type: input
+    id: author
+    attributes:
+      label: Author
+      description: who makes it
+    validations:
+      required: true
+  - type: input
+    id: categories
+    attributes:
+      label: Categories
+      description: Comma-separated category keys — filled by the website form.
+    validations:
+      required: true
+  - type: input
+    id: tags
+    attributes:
+      label: Tags
+      description: Comma-separated accepted tags — filled by the website form.
+  - type: input
+    id: attributes
+    attributes:
+      label: Attributes
+      description: "Comma-separated, from: open-source, local-first, privacy-first, self-hostable."
+  - type: input
+    id: pricing
+    attributes:
+      label: Pricing
+      description: "One of: free, freemium, paid, open-source."
+    validations:
+      required: true
+  - type: input
+    id: license
+    attributes:
+      label: License
+      description: SPDX id, e.g. MIT
+  - type: input
+    id: github
+    attributes:
+      label: GitHub
+      description: https://github.com/... repo

@@ -31,9 +31,14 @@ const GITHUB_LOGIN = /^[a-z0-9][a-z0-9-]{0,38}$/i;
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
-/** Checkbox labels from the issue form (normalized) -> attribute keys. */
+/**
+ * Attribute labels (normalized) -> attribute keys. Covers both the dropdown
+ * template's checkbox labels and the web template's comma-separated tokens
+ * (open-source, local-first, privacy-first, self-hostable).
+ */
 const ATTRIBUTE_LABELS: Record<string, keyof Listing["attributes"]> = {
   "open source": "openSource",
+  "open-source": "openSource",
   "local-first": "localFirst",
   "privacy-first": "privacyFirst",
   "self-hostable": "selfHostable",

@@ -1,16 +1,16 @@
-import { ExternalLink } from "lucide-react";
 import Head from "next/head";
 import { Footer } from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { RecommendedBadge } from "@/components/RecommendedBadge";
+import { SubmitForm } from "@/components/SubmitForm";
 
-const SUBMIT_URL =
+const GITHUB_FORM_URL =
   "https://github.com/Nano-Collective/nanolist/issues/new?template=submit-listing.yml";
 
 const FLOW_STEPS = [
   {
-    title: "Open a GitHub issue",
-    body: 'Use the "Submit a listing" form — it asks for the tool\'s name, URL, description, categories, and attributes.',
+    title: "Fill in the form below",
+    body: "It validates your listing as you type, then opens a prefilled GitHub issue — you review it there and press Submit.",
   },
   {
     title: "Automatic validation",
@@ -33,12 +33,12 @@ export default function SubmitPage() {
         <title>Submit a listing — Nanolist</title>
         <meta
           name="description"
-          content="Suggest an AI tool for the Nanolist directory. Open a GitHub issue with the Submit a listing form and a maintainer will review it."
+          content="Suggest an AI tool for the Nanolist directory. Fill in the submission form and it opens a prefilled GitHub issue for maintainer review."
         />
         <meta property="og:title" content="Submit a listing — Nanolist" />
         <meta
           property="og:description"
-          content="Suggest an AI tool for the Nanolist directory. Open a GitHub issue with the Submit a listing form and a maintainer will review it."
+          content="Suggest an AI tool for the Nanolist directory. Fill in the submission form and it opens a prefilled GitHub issue for maintainer review."
         />
       </Head>
       <div className="min-h-screen bg-background font-sans">
@@ -109,17 +109,25 @@ export default function SubmitPage() {
             </ol>
           </section>
 
-          <div className="mt-10">
+          <section className="mt-10">
+            <h2 className="font-bold text-sm text-foreground mb-6 font-mono tracking-wide uppercase border-b border-foreground/20 pb-2 inline-block">
+              Your listing
+            </h2>
+            <SubmitForm />
+          </section>
+
+          <p className="mt-10 border-t border-foreground/20 pt-6 text-sm text-foreground/70">
+            Prefer GitHub directly? Use the{" "}
             <a
-              href={SUBMIT_URL}
+              href={GITHUB_FORM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-12 items-center justify-center gap-3 rounded-none bg-[#0000EE] dark:bg-foreground px-8 text-sm font-semibold tracking-wide text-white dark:text-background transition-colors hover:bg-[#0000EE]/90 dark:hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+              className="font-semibold text-[#0000EE] underline dark:text-[#A1A1AA]"
             >
-              Submit a listing on GitHub
-              <ExternalLink className="h-4 w-4" aria-hidden="true" />
-            </a>
-          </div>
+              Submit a listing issue form
+            </a>{" "}
+            instead — it collects the same information.
+          </p>
         </main>
         <Footer />
       </div>

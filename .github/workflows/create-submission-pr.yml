@@ -121,11 +121,25 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Website-prefilled issues (label `via-website`, applied by the issue
+      # template itself) use the all-input template; hand-filled issues use the
+      # dropdown one. VIA_WEBSITE is a workflow-computed boolean, not user text.
+      - name: Select issue template
+        id: template
+        env:
+          VIA_WEBSITE: ${{ contains(github.event.issue.labels.*.name, 'via-website') }}
+        run: |
+          if [ "$VIA_WEBSITE" = "true" ]; then
+            echo "path=.github/ISSUE_TEMPLATE/submit-listing-web.yml" >> "$GITHUB_OUTPUT"
+          else
+            echo "path=.github/ISSUE_TEMPLATE/submit-listing.yml" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Parse issue form
         id: parser
         uses: stefanbuck/github-issue-parser@v3
         with:
-          template-path: .github/ISSUE_TEMPLATE/submit-listing.yml
+          template-path: ${{ steps.template.outputs.path }}
           issue-body: ${{ github.event.issue.body }}
 
       - name: Re-validate submission
@@ -162,11 +176,23 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # Same template selection as in `revalidate` (see comment there).
+      - name: Select issue template
+        id: template
+        env:
+          VIA_WEBSITE: ${{ contains(github.event.issue.labels.*.name, 'via-website') }}
+        run: |
+          if [ "$VIA_WEBSITE" = "true" ]; then
+            echo "path=.github/ISSUE_TEMPLATE/submit-listing-web.yml" >> "$GITHUB_OUTPUT"
+          else
+            echo "path=.github/ISSUE_TEMPLATE/submit-listing.yml" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Parse issue form
         id: parser
         uses: stefanbuck/github-issue-parser@v3
         with:
-          template-path: .github/ISSUE_TEMPLATE/submit-listing.yml
+          template-path: ${{ steps.template.outputs.path }}
           issue-body: ${{ github.event.issue.body }}
 
       - name: Write listing file

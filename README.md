@@ -31,7 +31,7 @@ Two humans (the approver and the reviewer) sit between any submission and the pu
 
 Nanolist accepts any real AI tool — product, framework, library, or model. Listings must be live, publicly accessible, and honestly described. We especially welcome tools that align with the Nano Collective's values: open source, local-first, and privacy-respecting — those are eligible for a Recommended badge from our curators. Not accepted: affiliate or tracking links, self-promotional spam, duplicates, vaporware, or listings that misrepresent what a tool does.
 
-To submit, use the [listing submission form](https://github.com/Nano-Collective/nanolist/issues/new?template=submit-listing.yml) — no fork or PR required. The [submission guide](docs/submitting.md) walks through the form fields, what the validation bot checks, and how the review lifecycle works.
+The recommended way to submit is the [website form](https://list.nanocollective.org/submit), which validates your listing and opens a prefilled GitHub issue for you; the [GitHub issue form](https://github.com/Nano-Collective/nanolist/issues/new?template=submit-listing.yml) remains available if you prefer it. Either way no fork or PR is required — the [submission guide](docs/submitting.md) walks through the form fields, what the validation bot checks, and how the review lifecycle works.
 
 ## For Developers
 

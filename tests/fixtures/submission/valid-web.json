@@ -1,0 +1,12 @@
+{
+  "name": "Example Notes AI",
+  "url": "https://example-notes-ai.dev",
+  "description": "An AI note-taking assistant that runs entirely on your machine, summarises meetings offline, and never sends your notes to a cloud service.",
+  "author": "Example Labs",
+  "categories": "writing,productivity",
+  "tags": "offline,markdown,automation",
+  "attributes": "open-source,local-first,self-hostable",
+  "pricing": "open-source",
+  "license": "MIT",
+  "github": "https://github.com/example-labs/example-notes-ai"
+}

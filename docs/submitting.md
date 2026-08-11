@@ -14,7 +14,7 @@ Nanolist accepts any real AI tool — product, framework, library, or model. Lis
 
 ## Submitting
 
-Open the [listing submission form](https://github.com/Nano-Collective/nanolist/issues/new?template=submit-listing.yml) and fill it in. The fields map directly onto the listing data model:
+The recommended path is the [website form](https://list.nanocollective.org/submit), which validates your listing as you type and opens a prefilled GitHub issue for you to review and submit. Alternatively, open the [listing submission form](https://github.com/Nano-Collective/nanolist/issues/new?template=submit-listing.yml) on GitHub directly and fill it in. The fields map directly onto the listing data model:
 
 - **Name** — the tool's name as its own site spells it.
 - **URL** — the tool's homepage. Must be `https://` and publicly reachable. Link the tool itself, not a blog post, announcement, or store page.
