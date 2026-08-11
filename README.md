@@ -59,7 +59,7 @@ One-time manual steps after pushing this repository. Without them the automation
 1. **Bot token.** Create a fine-grained personal access token scoped to this repository only, with **Contents: read/write** and **Pull requests: read/write**. Save it as the repository secret `NANOLIST_BOT_TOKEN`. The approval workflow uses it to open listing PRs, which then trigger `pr-checks.yml`. Without it, PRs fall back to `github.token` and show no status checks.
 2. **Branch protection on `main`.** Require 1 review from CODEOWNERS, dismiss stale approvals on new pushes, and require the status check `checks` from `pr-checks.yml`.
 3. **Cloudflare Pages.** Create a Pages project named `nanolist` and add the repository secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
-4. **Labels.** Create the labels `listing-submission`, `validated`, and `needs-changes` — the submission workflows apply them and will fail silently if they are missing.
+4. **Labels.** Create the labels `listing-submission`, `via-website`, `validated`, and `needs-changes` — the submission workflows apply them and will fail silently if they are missing. `via-website` matters most: GitHub only applies issue-template labels that already exist in the repository, and without it submissions from the website form are parsed against the wrong template.
 5. **CODEOWNERS.** Ensure the maintainers team referenced in `.github/CODEOWNERS` exists and has write access.
 
 ## License
