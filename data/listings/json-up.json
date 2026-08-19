@@ -2,7 +2,7 @@
   "slug": "json-up",
   "name": "json-up",
   "description": "Fast, type-safe JSON migration tool with Zod schema validation. Fluent builder API for versioned migration chains, full TypeScript inference, async migration support and automatic version tracking.",
-  "url": "https://github.com/Nano-Collective/json-up",
+  "url": "https://docs.nanocollective.org/json-up",
   "author": "Nano Collective",
   "categories": ["llm-libraries"],
   "tags": ["json", "migrations", "zod", "typescript", "type-safety"],

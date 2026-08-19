@@ -2,7 +2,7 @@
   "slug": "nanotune",
   "name": "Nanotune",
   "description": "Interactive CLI for fine-tuning small language models on Apple Silicon. A TUI guides you through data prep, training, export, chat and benchmarking, handling the MLX and llama.cpp tooling automatically.",
-  "url": "https://github.com/Nano-Collective/nanotune",
+  "url": "https://docs.nanocollective.org/nanotune",
   "author": "Nano Collective",
   "categories": ["fine-tuning"],
   "tags": ["cli", "mlx", "apple-silicon", "small-models", "llama-cpp"],

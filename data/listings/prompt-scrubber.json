@@ -2,7 +2,7 @@
   "slug": "prompt-scrubber",
   "name": "prompt-scrubber",
   "description": "Local-first utility that strips identifying content — emails, secrets, file paths, URLs, phone numbers — from prompts before they reach a cloud LLM, mapping each value to a stable placeholder so responses can be rehydrated locally.",
-  "url": "https://github.com/Nano-Collective/prompt-scrubber",
+  "url": "https://docs.nanocollective.org/prompt-scrub",
   "author": "Nano Collective",
   "categories": ["llm-libraries"],
   "tags": ["pii", "prompts", "cli", "typescript"],

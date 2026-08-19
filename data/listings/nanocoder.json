@@ -2,7 +2,7 @@
   "slug": "nanocoder",
   "name": "Nanocoder",
   "description": "Open coding agent for your terminal, built by a community collective. Runs agentic coding on the model of your choice — local models via Ollama or any OpenAI-compatible API — so your code stays on your machine.",
-  "url": "https://github.com/Nano-Collective/nanocoder",
+  "url": "https://docs.nanocollective.org/nanocoder",
   "author": "Nano Collective",
   "categories": ["coding-assistants"],
   "tags": ["cli", "coding-agent", "local-llm", "ollama", "typescript"],
