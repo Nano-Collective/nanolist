@@ -7,12 +7,17 @@ import { Footer } from "@/components/Footer";
 import { ListingIcon } from "@/components/ListingIcon";
 import Navbar from "@/components/Navbar";
 import { RecommendedBadge } from "@/components/RecommendedBadge";
-import { getAllCategories, getAllListings } from "@/lib/listings";
+import {
+  getAllCategories,
+  getAllListings,
+  getCategoryCounts,
+} from "@/lib/listings";
 import type { Category, Listing } from "@/lib/schema";
 
 interface ListingPageProps {
   listing: Listing;
   categories: Category[];
+  categoryCounts: Record<string, number>;
 }
 
 const PRICING_LABELS: Record<Listing["pricing"], string> = {
@@ -44,7 +49,11 @@ function formatDate(isoDate: string): string {
   return `${monthName} ${day}, ${year}`;
 }
 
-export default function ListingPage({ listing, categories }: ListingPageProps) {
+export default function ListingPage({
+  listing,
+  categories,
+  categoryCounts,
+}: ListingPageProps) {
   const title = `${listing.name} — Nanolist`;
 
   return (
@@ -56,7 +65,7 @@ export default function ListingPage({ listing, categories }: ListingPageProps) {
         <meta property="og:description" content={listing.description} />
       </Head>
       <div className="min-h-screen bg-background font-sans">
-        <Navbar />
+        <Navbar categoryCounts={categoryCounts} />
         <main className="container mx-auto max-w-3xl px-4 md:px-6 py-10">
           <Link
             href="/"
@@ -232,5 +241,7 @@ export const getStaticProps: GetStaticProps<ListingPageProps> = async ({
   const categories = getAllCategories().filter((category) =>
     listing.categories.includes(category.key),
   );
-  return { props: { listing, categories } };
+  return {
+    props: { listing, categories, categoryCounts: getCategoryCounts() },
+  };
 };

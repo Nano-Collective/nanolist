@@ -5,7 +5,11 @@ import Link from "next/link";
 import { Footer } from "@/components/Footer";
 import { ListingGrid } from "@/components/ListingGrid";
 import Navbar from "@/components/Navbar";
-import { getAllCategories, getAllListings } from "@/lib/listings";
+import {
+  getAllCategories,
+  getAllListings,
+  getCategoryCounts,
+} from "@/lib/listings";
 import type { Category, Listing } from "@/lib/schema";
 
 interface CategoryPageProps {
@@ -13,12 +17,14 @@ interface CategoryPageProps {
   listings: Listing[];
   /** Maps category keys to display names, for the listing cards. */
   categoryNames: Record<string, string>;
+  categoryCounts: Record<string, number>;
 }
 
 export default function CategoryPage({
   category,
   listings,
   categoryNames,
+  categoryCounts,
 }: CategoryPageProps) {
   const title = `${category.name} — Nanolist`;
 
@@ -31,7 +37,7 @@ export default function CategoryPage({
         <meta property="og:description" content={category.description} />
       </Head>
       <div className="min-h-screen bg-background font-sans">
-        <Navbar />
+        <Navbar categoryCounts={categoryCounts} />
         <main className="container mx-auto px-4 md:px-6 py-10">
           <Link
             href="/"
@@ -91,5 +97,12 @@ export const getStaticProps: GetStaticProps<CategoryPageProps> = async ({
   const categoryNames = Object.fromEntries(
     categories.map((item) => [item.key, item.name]),
   );
-  return { props: { category, listings, categoryNames } };
+  return {
+    props: {
+      category,
+      listings,
+      categoryNames,
+      categoryCounts: getCategoryCounts(),
+    },
+  };
 };

@@ -1,8 +1,10 @@
+import type { GetStaticProps } from "next";
 import Head from "next/head";
 import { Footer } from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { RecommendedBadge } from "@/components/RecommendedBadge";
 import { SubmitForm } from "@/components/SubmitForm";
+import { getCategoryCounts } from "@/lib/listings";
 
 const GITHUB_FORM_URL =
   "https://github.com/Nano-Collective/nanolist/issues/new?template=submit-listing.yml";
@@ -26,7 +28,11 @@ const FLOW_STEPS = [
   },
 ];
 
-export default function SubmitPage() {
+interface SubmitPageProps {
+  categoryCounts: Record<string, number>;
+}
+
+export default function SubmitPage({ categoryCounts }: SubmitPageProps) {
   return (
     <>
       <Head>
@@ -42,7 +48,7 @@ export default function SubmitPage() {
         />
       </Head>
       <div className="min-h-screen bg-background font-sans">
-        <Navbar />
+        <Navbar categoryCounts={categoryCounts} />
         <main className="container mx-auto max-w-3xl px-4 md:px-6 py-12">
           <div className="flex items-center gap-2 text-xs font-semibold font-mono text-muted-foreground uppercase tracking-widest border-b border-foreground/20 pb-2 max-w-[220px]">
             <span className="text-[#0000EE] dark:text-[#A1A1AA] font-bold">
@@ -134,3 +140,7 @@ export default function SubmitPage() {
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps<SubmitPageProps> = async () => {
+  return { props: { categoryCounts: getCategoryCounts() } };
+};

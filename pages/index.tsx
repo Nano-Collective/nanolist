@@ -2,19 +2,38 @@ import Fuse from "fuse.js";
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import type { AttributeKey } from "@/components/AttributeBadges";
-import { FilterBar, type SortKey } from "@/components/FilterBar";
+import { useRouter } from "next/router";
+import { useMemo } from "react";
+import {
+  ATTRIBUTE_LABELS,
+  type AttributeKey,
+} from "@/components/AttributeBadges";
+import {
+  FilterBar,
+  PRICING_OPTIONS,
+  SORT_OPTIONS,
+  type SortKey,
+} from "@/components/FilterBar";
 import { Footer } from "@/components/Footer";
 import { ListingGrid } from "@/components/ListingGrid";
 import Navbar from "@/components/Navbar";
 import { SearchBar } from "@/components/SearchBar";
-import { getAllCategories, getAllListings } from "@/lib/listings";
-import type { Category, CategoryKey, Listing } from "@/lib/schema";
+import {
+  getAllCategories,
+  getAllListings,
+  getCategoryCounts,
+} from "@/lib/listings";
+import {
+  CATEGORY_KEYS,
+  type Category,
+  type CategoryKey,
+  type Listing,
+} from "@/lib/schema";
 
 interface HomeProps {
   listings: Listing[];
   categories: Category[];
+  categoryCounts: Record<string, number>;
 }
 
 const SORT_COMPARATORS: Record<SortKey, (a: Listing, b: Listing) => number> = {
@@ -38,17 +57,80 @@ const SORT_COMPARATORS: Record<SortKey, (a: Listing, b: Listing) => number> = {
   az: (a, b) => a.name.localeCompare(b.name),
 };
 
-export default function Home({ listings, categories }: HomeProps) {
-  const [query, setQuery] = useState("");
-  const [category, setCategory] = useState("");
-  const [pricing, setPricing] = useState("");
-  const [sort, setSort] = useState<SortKey>("recommended");
-  const [attributes, setAttributes] = useState<Record<AttributeKey, boolean>>({
-    openSource: false,
-    localFirst: false,
-    privacyFirst: false,
-    selfHostable: false,
-  });
+const ATTRIBUTE_KEYS = ATTRIBUTE_LABELS.map(([key]) => key);
+
+/** A query param's value, ignoring repeated params. */
+function firstParam(value: string | string[] | undefined): string {
+  return typeof value === "string" ? value : "";
+}
+
+export default function Home({
+  listings,
+  categories,
+  categoryCounts,
+}: HomeProps) {
+  const router = useRouter();
+
+  // All search/filter/sort state lives in the URL (`/?q=…&category=…&
+  // pricing=…&attrs=…&sort=…`) so nav links and shared URLs reproduce the
+  // exact view. Unrecognised values are ignored; defaults are omitted from
+  // the URL. With `output: "export"` the query string is only available
+  // client-side: it is empty on first render and populates once the router
+  // hydrates, so a direct load briefly shows the unfiltered directory —
+  // expected for SSG.
+  const query = firstParam(router.query.q);
+
+  const rawCategory = firstParam(router.query.category);
+  const category = (CATEGORY_KEYS as readonly string[]).includes(rawCategory)
+    ? rawCategory
+    : "";
+
+  const rawPricing = firstParam(router.query.pricing);
+  const pricing = PRICING_OPTIONS.some((option) => option.value === rawPricing)
+    ? rawPricing
+    : "";
+
+  const rawSort = firstParam(router.query.sort);
+  const sort: SortKey = SORT_OPTIONS.some((option) => option.value === rawSort)
+    ? (rawSort as SortKey)
+    : "recommended";
+
+  const attrsParam = firstParam(router.query.attrs);
+  const attributes = useMemo(() => {
+    const enabled = new Set(attrsParam.split(","));
+    return Object.fromEntries(
+      ATTRIBUTE_KEYS.map((key) => [key, enabled.has(key)]),
+    ) as Record<AttributeKey, boolean>;
+  }, [attrsParam]);
+
+  /**
+   * Merge updates into the current query string via a shallow route change
+   * (no data fetching, SSG-safe). `null` removes a param. `replace` avoids
+   * flooding the history — used for per-keystroke search updates.
+   */
+  const updateQuery = (
+    updates: Record<string, string | null>,
+    { replace = false } = {},
+  ) => {
+    const nextQuery = { ...router.query };
+    for (const [key, value] of Object.entries(updates)) {
+      if (value === null) delete nextQuery[key];
+      else nextQuery[key] = value;
+    }
+    const navigate = replace ? router.replace : router.push;
+    navigate({ pathname: "/", query: nextQuery }, undefined, {
+      shallow: true,
+      scroll: false,
+    });
+  };
+
+  const setQuery = (value: string) =>
+    updateQuery({ q: value || null }, { replace: true });
+  const setCategory = (value: string) =>
+    updateQuery({ category: value || null });
+  const setPricing = (value: string) => updateQuery({ pricing: value || null });
+  const setSort = (value: SortKey) =>
+    updateQuery({ sort: value === "recommended" ? null : value });
 
   const fuse = useMemo(
     () =>
@@ -96,7 +178,10 @@ export default function Home({ listings, categories }: HomeProps) {
   }, [listings, fuse, query, category, attributes, pricing, sort]);
 
   const toggleAttribute = (key: AttributeKey) => {
-    setAttributes((previous) => ({ ...previous, [key]: !previous[key] }));
+    const enabled = ATTRIBUTE_KEYS.filter((attribute) =>
+      attribute === key ? !attributes[attribute] : attributes[attribute],
+    );
+    updateQuery({ attrs: enabled.length > 0 ? enabled.join(",") : null });
   };
 
   return (
@@ -117,7 +202,7 @@ export default function Home({ listings, categories }: HomeProps) {
         />
       </Head>
       <div className="min-h-screen bg-background font-sans">
-        <Navbar />
+        <Navbar categoryCounts={categoryCounts} />
         <main>
           {/* Hero */}
           <section className="container mx-auto px-4 md:px-6 pt-12 pb-10">
@@ -190,5 +275,7 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
     (listing) => listing.status === "active",
   );
   const categories = getAllCategories();
-  return { props: { listings, categories } };
+  return {
+    props: { listings, categories, categoryCounts: getCategoryCounts() },
+  };
 };

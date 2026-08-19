@@ -84,6 +84,21 @@ export function getAllListings(): Listing[] {
 }
 
 /**
+ * Active-listing count per category key, for the nav categories menu.
+ * Every category key is present, so categories with no listings count as 0.
+ */
+export function getCategoryCounts(): Record<string, number> {
+  const counts = Object.fromEntries(CATEGORY_KEYS.map((key) => [key, 0]));
+  for (const listing of getAllListings()) {
+    if (listing.status !== "active") continue;
+    for (const key of listing.categories) {
+      counts[key] += 1;
+    }
+  }
+  return counts;
+}
+
+/**
  * Reads and validates the categories in data/taxonomy.json. Asserts the
  * on-disk category keys cover CATEGORY_KEYS (the bundled copy of the same
  * file) exactly — no missing, duplicate, or unknown keys — which guards
