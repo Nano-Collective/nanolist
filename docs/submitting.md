@@ -63,7 +63,7 @@ If validation fails, the bot labels the issue `needs-changes` and tells you exac
 2. **A maintainer approves** by commenting `/approve` on the issue. The bot verifies via the GitHub API that the commenter actually has maintainer permissions — a random commenter typing `/approve` does nothing.
 3. **The bot opens a pull request** adding a single file, `data/listings/<slug>.json`, after re-validating the submission.
 4. **A code owner reviews** the PR — this is a second, human check on the content.
-5. **Merge publishes.** The merge to `master` triggers a Cloudflare Pages build and the listing appears on the site.
+5. **Merge publishes.** The merge to `main` triggers a Cloudflare Pages build and the listing appears on the site.
 
 There is no fixed turnaround; maintainers review as time allows. If a submission sits for a while, a polite ping on the issue is fine.
 

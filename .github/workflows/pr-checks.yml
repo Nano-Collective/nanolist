@@ -9,7 +9,7 @@ name: Pull Request Automated Checks
 on:
   pull_request:
     types: [opened, synchronize, reopened]
-    branches: [master]
+    branches: [main]
 
 permissions:
   actions: read

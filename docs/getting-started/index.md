@@ -35,4 +35,4 @@ pnpm build
 pnpm test:all
 ```
 
-For coding standards, commands, and how listing data changes work, see [CONTRIBUTING.md](https://github.com/Nano-Collective/nanolist/blob/master/CONTRIBUTING.md).
+For coding standards, commands, and how listing data changes work, see [CONTRIBUTING.md](https://github.com/Nano-Collective/nanolist/blob/main/CONTRIBUTING.md).
