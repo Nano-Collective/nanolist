@@ -216,6 +216,14 @@ jobs:
           esac
           echo "slug=$SLUG" >> "$GITHUB_OUTPUT"
 
+      # The generated JSON must match the repo's Biome formatting, or the
+      # pr-checks lint job fails on the bot's own PR (e.g. Biome keeps short
+      # arrays on one line where JSON.stringify breaks them across lines).
+      - name: Format listing file
+        env:
+          SLUG: ${{ steps.write.outputs.slug }}
+        run: pnpm exec biome format --write "data/listings/$SLUG.json"
+
       - name: Fetch icon (best effort)
         # scripts/fetch-icons.ts may not exist yet; the icon is optional.
         continue-on-error: true
