@@ -1,7 +1,7 @@
 ---
 title: "Architecture"
 description: "How Nanolist works: data flow from submission to publish, the security model for hostile input, and how the site stays private"
-sidebar_order: 2
+sidebar_order: 4
 ---
 
 # Architecture
@@ -18,7 +18,7 @@ issue form ──▶ validate workflow ──▶ /approve gate ──▶ bot PR 
 2. **Validate workflow.** Runs read-only on the issue: schema-level checks (https URL with a public hostname, plain-text description within length limits, category and tag limits), duplicate detection against existing and pending listings, and anti-abuse checks (submitter account age ≥ 7 days, ≤ 5 submissions per day). Results are commented on the issue and it is labelled `validated` or `needs-changes`.
 3. **`/approve` gate.** A maintainer comments `/approve`. The workflow verifies the commenter's repository permission level through the GitHub API before doing anything — the comment text alone grants nothing.
 4. **Bot PR.** The submission is **re-validated at approval time** (the issue body may have been edited since the first pass), then the bot opens a PR adding exactly one file: `data/listings/<slug>.json`. The PR is authored with the `NANOLIST_BOT_TOKEN` fine-grained PAT so that `pr-checks.yml` runs on it; PRs opened with the default `github.token` would not trigger checks.
-5. **Review and merge.** Branch protection requires one CODEOWNERS review and the `checks` status from `pr-checks.yml` (which includes `pnpm validate`, re-running the zod schema against every listing). Merge to `main` triggers the Cloudflare Pages build and deploy.
+5. **Review and merge.** The review ruleset requires one CODEOWNERS review, and the quality ruleset requires the shared `pr-checks` status checks plus the local `Validate Listings` job (which re-runs the zod schema against every listing). Merge to `master` triggers the Cloudflare Pages build and deploy.
 
 ## Security model
 
