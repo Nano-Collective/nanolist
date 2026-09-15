@@ -24,7 +24,7 @@ export function SearchBar({ value, onChange, className }: SearchBarProps) {
         autoComplete="off"
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="h-10 w-full border border-foreground/20 bg-background pl-9 pr-3 font-mono text-sm text-foreground placeholder:text-muted-foreground transition-colors hover:border-foreground/40 focus-visible:border-[#0000EE] focus-visible:outline-none dark:focus-visible:border-[#A1A1AA]"
+        className="h-9 w-full border border-foreground/20 bg-background pl-9 pr-3 font-mono text-sm text-foreground placeholder:text-muted-foreground transition-colors hover:border-foreground/40 focus-visible:border-[#0000EE] focus-visible:outline-none dark:focus-visible:border-[#A1A1AA]"
       />
     </div>
   );
