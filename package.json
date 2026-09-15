@@ -2,6 +2,7 @@
   "name": "nanolist",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "packageManager": "pnpm@11.0.9",
   "scripts": {
     "dev": "next dev --turbopack",
@@ -15,8 +16,28 @@
     "validate": "tsx scripts/validate-listings.ts && tsx scripts/generate-issue-template.ts --check",
     "generate:issue-template": "tsx scripts/generate-issue-template.ts",
     "fetch-icons": "tsx scripts/fetch-icons.ts",
-    "test:all": "pnpm run types && pnpm run lint && pnpm run knip && pnpm run validate",
+    "test:lint": "biome lint .",
+    "test:format": "biome ci --formatter-enabled=true --linter-enabled=false --assist-enabled=false .",
+    "test:types": "tsc --noEmit",
+    "test:knip": "knip",
+    "test:ava": "ava",
+    "test:ava:coverage": "c8 --reporter=text --reporter=json-summary ava",
+    "test:audit": "pnpm audit --audit-level=high --ignore-unfixable",
+    "test:security": "semgrep scan --config auto --error",
+    "test:all": "pnpm run test:format && pnpm run test:lint && pnpm run test:types && pnpm run test:knip && pnpm run validate && pnpm run test:ava:coverage",
     "parse-submission": "tsx scripts/parse-submission.ts"
+  },
+  "ava": {
+    "files": [
+      "tests/**/*.test.ts"
+    ],
+    "extensions": [
+      "ts"
+    ],
+    "workerThreads": false,
+    "nodeArguments": [
+      "--import=tsx"
+    ]
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.20",
@@ -36,6 +57,8 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "ava": "^8.0.1",
+    "c8": "^12.0.0",
     "knip": "^6.17.1",
     "tailwindcss": "^4",
     "tsx": "^4.20.0",

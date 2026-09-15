@@ -5,7 +5,7 @@
   "url": "https://example.com",
   "author": "Example Org",
   "categories": ["chat-assistants", "local-inference"],
-  "tags": ["open-source", "local-first"],
+  "tags": ["local-llm", "cli"],
   "attributes": {
     "openSource": true,
     "localFirst": true,
