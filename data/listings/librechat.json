@@ -1,0 +1,29 @@
+{
+  "slug": "librechat",
+  "name": "LibreChat",
+  "description": "Self-hostable, open-source chat UI supporting many providers and local models, with agents, MCP, search and multi-user auth. Bring your own keys; data stays on your server.",
+  "url": "https://librechat.ai",
+  "author": "Danny Avila (@danny-avila)",
+  "categories": [
+    "chat-assistants"
+  ],
+  "tags": [
+    "chatbot",
+    "agents",
+    "desktop-app"
+  ],
+  "attributes": {
+    "openSource": false,
+    "localFirst": false,
+    "privacyFirst": false,
+    "selfHostable": false
+  },
+  "pricing": "open-source",
+  "license": "MIT",
+  "github": "https://github.com/danny-avila/LibreChat",
+  "icon": "/icons/librechat.png",
+  "submittedBy": "mrspence",
+  "addedAt": "2026-09-15",
+  "recommendedAt": null,
+  "status": "active"
+}
