@@ -4,13 +4,19 @@
   "exclude": [
     "/_next/*",
     "/icons/*",
+    "/apple-touch-icon.png",
     "/atom.xml",
+    "/favicon-96x96.png",
     "/favicon.ico",
+    "/favicon.svg",
     "/feed.xml",
     "/listings.json",
     "/llms.txt",
     "/recommended.xml",
     "/robots.txt",
-    "/sitemap.xml"
+    "/site.webmanifest",
+    "/sitemap.xml",
+    "/web-app-manifest-192x192.png",
+    "/web-app-manifest-512x512.png"
   ]
 }

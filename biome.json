@@ -6,7 +6,7 @@
     "useIgnoreFile": true
   },
   "files": {
-    "includes": ["**", "!!**/dist", "!badges", "!coverage"]
+    "includes": ["**", "!!**/dist", "!badges", "!coverage", "!public/**/*.svg"]
   },
   "formatter": {
     "enabled": true,
