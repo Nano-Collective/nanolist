@@ -12,7 +12,7 @@ Nanolist is maintained by the Nano Collective and shaped by the people who use i
 
 - **Discord**: [discord.gg/ktPDV6rekE](https://discord.gg/ktPDV6rekE) — the collective's main channel; say hello if you are unsure where to start.
 - **GitHub issues**: [bug reports and feature requests](https://github.com/Nano-Collective/nanolist/issues).
-- **Contributing**: [CONTRIBUTING.md](https://github.com/Nano-Collective/nanolist/blob/master/CONTRIBUTING.md) covers development setup, standards, and the review process.
+- **Contributing**: [CONTRIBUTING.md](https://github.com/Nano-Collective/nanolist/blob/main/CONTRIBUTING.md) covers development setup, standards, and the review process.
 
 ## Code of Conduct
 

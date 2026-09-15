@@ -24,7 +24,7 @@ Manual steps after pushing this repository. Without them the automation degrades
 
 ## Releases
 
-Nanolist is a deployed site, not a published package. Merging to `master` triggers the Cloudflare Pages build (`deploy-cloudflare-pages.yaml`); that is the release. There are no version bumps, changesets, or registry publishes.
+Nanolist is a deployed site, not a published package. Merging to `main` triggers the Cloudflare Pages build (`deploy-cloudflare-pages.yaml`); that is the release. There are no version bumps, changesets, or registry publishes.
 
 ## Curation
 

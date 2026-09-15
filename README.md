@@ -4,12 +4,12 @@ The easiest way to browse the AI tool ecosystem — a community-curated director
 
 Built by the [Nano Collective](https://nanocollective.org), a community collective building AI tooling not for profit, but for the community. Every listing is a single JSON file in this repository, reviewed by humans before it goes live, and rendered as a fast, static, searchable site. Visitors make **zero third-party requests** — search runs in the browser, icons are self-hosted, and there is no analytics.
 
-![Build Status](https://github.com/Nano-Collective/nanolist/raw/master/badges/build.svg)
-![Coverage](https://github.com/Nano-Collective/nanolist/raw/master/badges/coverage.svg)
-![License](https://github.com/Nano-Collective/nanolist/raw/master/badges/license.svg)
-![Repo Size](https://github.com/Nano-Collective/nanolist/raw/master/badges/repo-size.svg)
-![Stars](https://github.com/Nano-Collective/nanolist/raw/master/badges/stars.svg)
-![Forks](https://github.com/Nano-Collective/nanolist/raw/master/badges/forks.svg)
+![Build Status](https://github.com/Nano-Collective/nanolist/raw/main/badges/build.svg)
+![Coverage](https://github.com/Nano-Collective/nanolist/raw/main/badges/coverage.svg)
+![License](https://github.com/Nano-Collective/nanolist/raw/main/badges/license.svg)
+![Repo Size](https://github.com/Nano-Collective/nanolist/raw/main/badges/repo-size.svg)
+![Stars](https://github.com/Nano-Collective/nanolist/raw/main/badges/stars.svg)
+![Forks](https://github.com/Nano-Collective/nanolist/raw/main/badges/forks.svg)
 
 ## Quick Start
 

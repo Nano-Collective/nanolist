@@ -64,16 +64,14 @@ Lowercase, imperative mood, no trailing period. Scope is optional in parentheses
 
 ## Releases
 
-Nanolist is a deployed site, not a published package: merging to `master` triggers the Cloudflare Pages build, and that is the release. Contributors never bump the version in `package.json` — versioning, such as it is, is a maintainer responsibility.
+Nanolist is a deployed site, not a published package: merging to `main` triggers the Cloudflare Pages build, and that is the release. Contributors never bump the version in `package.json` — versioning, such as it is, is a maintainer responsibility.
 
 ## Divergences from the collective playbook
 
-The [collective conventions](https://docs.nanocollective.org/collective/projects/creating-a-new-project) are the default here, with three documented divergences:
+The [collective conventions](https://docs.nanocollective.org/collective/projects/creating-a-new-project) are the default here, with two documented divergences:
 
 - **No changesets or `release.yml`.** There is no package registry to publish to; deploys to Cloudflare Pages on merge are the release path.
 - **`CODEOWNERS` names individual maintainers** rather than `@Nano-Collective/core-team`. Every path requires a maintainer's review — that is the gate that stops automation-created submission PRs (built from hostile submitter input) from merging without a human's approval.
-- **The default branch is `master`**, not `main`.
-
 ## Code of Conduct
 
 Nanolist follows the [Nano Collective Code of Conduct](https://docs.nanocollective.org/collective/organisation/community). We do not redefine it here — read it there, and hold to it. Questions about contributor compensation are covered by the [Economics Charter](https://docs.nanocollective.org/collective/organisation/economics-charter); we do not restate its terms here.
