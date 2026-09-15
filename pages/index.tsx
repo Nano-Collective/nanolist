@@ -1,9 +1,10 @@
 import Fuse from "fuse.js";
+import { SlidersHorizontal } from "lucide-react";
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import {
   ATTRIBUTE_LABELS,
   type AttributeKey,
@@ -29,6 +30,7 @@ import {
   type CategoryKey,
   type Listing,
 } from "@/lib/schema";
+import { cn } from "@/lib/utils";
 
 interface HomeProps {
   listings: Listing[];
@@ -70,6 +72,9 @@ export default function Home({
   categoryCounts,
 }: HomeProps) {
   const router = useRouter();
+  // Mobile-only disclosure for the filter controls; on md+ they are always
+  // visible inline in the toolbar.
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   // All search/filter/sort state lives in the URL (`/?q=…&category=…&
   // pricing=…&attrs=…&sort=…`) so nav links and shared URLs reproduce the
@@ -184,6 +189,11 @@ export default function Home({
     updateQuery({ attrs: enabled.length > 0 ? enabled.join(",") : null });
   };
 
+  const activeFilterCount =
+    (category ? 1 : 0) +
+    (pricing ? 1 : 0) +
+    ATTRIBUTE_KEYS.filter((key) => attributes[key]).length;
+
   return (
     <>
       <Head>
@@ -235,11 +245,45 @@ export default function Home({
             </p>
           </section>
 
-          {/* Toolbar */}
+          {/* Toolbar: one row of search + filters; on mobile the filters
+              collapse behind the Filters button to save vertical space. */}
           <div className="sticky top-14 z-30 border-y border-foreground/20 bg-background/95 backdrop-blur-md">
-            <div className="container mx-auto flex flex-col gap-3 px-4 md:px-6 py-4">
-              <SearchBar value={query} onChange={setQuery} />
+            <div className="container mx-auto flex flex-wrap items-center gap-2 px-4 py-2.5 md:px-6">
+              <SearchBar
+                value={query}
+                onChange={setQuery}
+                className="min-w-0 flex-1 basis-48"
+              />
+              <button
+                type="button"
+                aria-expanded={filtersOpen}
+                aria-controls="filter-panel"
+                aria-label={
+                  activeFilterCount > 0
+                    ? `Filters (${activeFilterCount} active)`
+                    : "Filters"
+                }
+                onClick={() => setFiltersOpen((open) => !open)}
+                className={cn(
+                  "relative flex h-9 w-9 shrink-0 items-center justify-center border transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring md:hidden",
+                  filtersOpen || activeFilterCount > 0
+                    ? "border-foreground text-foreground"
+                    : "border-foreground/20 text-foreground/70 hover:border-foreground hover:text-foreground",
+                )}
+              >
+                <SlidersHorizontal className="h-4 w-4" aria-hidden="true" />
+                {activeFilterCount > 0 && (
+                  <span
+                    aria-hidden="true"
+                    className="absolute -right-1.5 -top-1.5 flex h-4 min-w-4 items-center justify-center bg-[#0000EE] px-1 font-mono text-[10px] font-bold text-white dark:bg-[#A1A1AA] dark:text-black"
+                  >
+                    {activeFilterCount}
+                  </span>
+                )}
+              </button>
               <FilterBar
+                id="filter-panel"
+                className={filtersOpen ? "flex" : "hidden"}
                 categories={categories}
                 category={category}
                 onCategoryChange={setCategory}

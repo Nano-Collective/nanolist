@@ -33,10 +33,12 @@ interface FilterBarProps {
   onPricingChange: (value: string) => void;
   sort: SortKey;
   onSortChange: (value: SortKey) => void;
+  id?: string;
+  className?: string;
 }
 
 const selectClasses =
-  "h-10 max-w-full border border-foreground/20 bg-background px-2 font-mono text-xs text-foreground transition-colors hover:border-foreground/40 focus-visible:border-[#0000EE] focus-visible:outline-none dark:focus-visible:border-[#A1A1AA]";
+  "h-9 max-w-full border border-foreground/20 bg-background px-2 font-mono text-xs text-foreground transition-colors hover:border-foreground/40 focus-visible:border-[#0000EE] focus-visible:outline-none dark:focus-visible:border-[#A1A1AA]";
 
 export function FilterBar({
   categories,
@@ -48,6 +50,8 @@ export function FilterBar({
   onPricingChange,
   sort,
   onSortChange,
+  id,
+  className,
 }: FilterBarProps) {
   // Group categories by their `group` field, preserving file order.
   const groups: Array<[string, Category[]]> = [];
@@ -61,7 +65,10 @@ export function FilterBar({
   }
 
   return (
-    <div className="flex flex-wrap items-center gap-2">
+    // On md+ the wrapper dissolves (`contents`) so each control sits directly
+    // in the toolbar's flex row beside the search input; on mobile it renders
+    // as a stacked panel toggled by the Filters button.
+    <div id={id} className={cn("w-full flex-col gap-2 md:contents", className)}>
       <label htmlFor="filter-category" className="sr-only">
         Filter by category
       </label>
@@ -69,7 +76,7 @@ export function FilterBar({
         id="filter-category"
         value={category}
         onChange={(event) => onCategoryChange(event.target.value)}
-        className={selectClasses}
+        className={cn(selectClasses, "w-full md:w-auto")}
       >
         <option value="">All categories</option>
         {groups.map(([groupName, items]) => (
@@ -90,7 +97,7 @@ export function FilterBar({
         id="filter-pricing"
         value={pricing}
         onChange={(event) => onPricingChange(event.target.value)}
-        className={selectClasses}
+        className={cn(selectClasses, "w-full md:w-auto")}
       >
         <option value="">All pricing</option>
         {PRICING_OPTIONS.map((option) => (
@@ -109,7 +116,7 @@ export function FilterBar({
             aria-pressed={attributes[key]}
             onClick={() => onAttributeToggle(key)}
             className={cn(
-              "h-10 border px-3 font-mono text-xs uppercase tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
+              "h-9 border px-2.5 font-mono text-xs uppercase tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
               attributes[key]
                 ? "border-[#0000EE] bg-[#0000EE] font-bold text-white dark:border-[#A1A1AA] dark:bg-[#A1A1AA] dark:text-black"
                 : "border-foreground/20 bg-background text-foreground/70 hover:border-foreground hover:text-foreground",
@@ -120,7 +127,7 @@ export function FilterBar({
         ))}
       </fieldset>
 
-      <div className="ml-auto flex items-center gap-2">
+      <div className="flex items-center gap-2 md:ml-auto">
         <label
           htmlFor="filter-sort"
           className="font-mono text-xs uppercase tracking-wide text-muted-foreground"
@@ -131,7 +138,7 @@ export function FilterBar({
           id="filter-sort"
           value={sort}
           onChange={(event) => onSortChange(event.target.value as SortKey)}
-          className={selectClasses}
+          className={cn(selectClasses, "flex-1 md:flex-none")}
         >
           {SORT_OPTIONS.map((option) => (
             <option key={option.value} value={option.value}>
