@@ -1,0 +1,114 @@
+# When a PR that adds a listing merges, close the loop on the submission
+# issue it was created from: comment with the live listing URL and label the
+# issue `approved` + `nominated`.
+#
+# Linked issues are resolved via GitHub's closing-issues references (the
+# `Closes #N` line the submission bot puts in the PR body, or a manually
+# linked issue) — never by parsing user-controlled text.
+#
+# SECURITY: `pull_request_target` runs with write permissions in the base-repo
+# context, which is safe here ONLY because this workflow never checks out or
+# executes PR code. It reads the changed-file list and linked issues from the
+# API, and the only PR-derived data used in output is the listing slug, which
+# is regex-constrained to kebab-case below.
+name: Nominate listing on merge
+
+on:
+  pull_request_target:
+    types: [closed]
+    paths:
+      - "data/listings/*.json"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nominate-on-merge-${{ github.event.pull_request.number }}
+
+jobs:
+  nominate:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: read
+    steps:
+      - name: Comment and label linked issues
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const prNumber = context.payload.pull_request.number;
+
+            // Newly added listing files -> slugs. The regex both finds the
+            // slug and constrains it to kebab-case, so it is safe to embed
+            // in the comment URL.
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner,
+              repo,
+              pull_number: prNumber,
+              per_page: 100,
+            });
+            const slugs = files
+              .filter((f) => f.status === "added")
+              .map((f) => f.filename.match(/^data\/listings\/([a-z0-9-]+)\.json$/))
+              .filter(Boolean)
+              .map((m) => m[1]);
+            if (slugs.length === 0) {
+              core.info("No newly added listing files; nothing to nominate.");
+              return;
+            }
+
+            // Issues this PR closes (from `Closes #N` or a manual link),
+            // restricted to this repository.
+            const { repository } = await github.graphql(
+              `query ($owner: String!, $repo: String!, $pr: Int!) {
+                repository(owner: $owner, name: $repo) {
+                  pullRequest(number: $pr) {
+                    closingIssuesReferences(first: 10) {
+                      nodes {
+                        number
+                        repository { nameWithOwner }
+                      }
+                    }
+                  }
+                }
+              }`,
+              { owner, repo, pr: prNumber },
+            );
+            const issues = repository.pullRequest.closingIssuesReferences.nodes
+              .filter((n) => n.repository.nameWithOwner === `${owner}/${repo}`)
+              .map((n) => n.number);
+            if (issues.length === 0) {
+              core.info("Merged listing PR has no linked issue; nothing to do.");
+              return;
+            }
+
+            // Labels are created on first use so the workflow does not
+            // depend on repo setup.
+            const labels = [
+              { name: "approved", color: "0e8a16", description: "Listing approved by a maintainer" },
+              { name: "nominated", color: "fbca04", description: "Listing merged and live on nanolist" },
+            ];
+            for (const label of labels) {
+              try {
+                await github.rest.issues.getLabel({ owner, repo, name: label.name });
+              } catch (error) {
+                if (error.status !== 404) throw error;
+                await github.rest.issues.createLabel({ owner, repo, ...label });
+              }
+            }
+
+            const urls = slugs.map(
+              (slug) => `https://list.nanocollective.org/listing/${slug}`,
+            );
+            const body = `Listing approved and nominated - ${urls.join(", ")}`;
+            for (const issue_number of issues) {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body });
+              await github.rest.issues.addLabels({
+                owner,
+                repo,
+                issue_number,
+                labels: labels.map((l) => l.name),
+              });
+            }
