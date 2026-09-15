@@ -68,6 +68,25 @@ jobs:
             const issue_number = context.payload.issue.number;
             const user = context.payload.issue.user;
 
+            // Codeowners are the maintainers who review submissions; exempt
+            // them so their own test submissions don't trip the rate limit.
+            // CODEOWNERS is read from the default-branch checkout, so this
+            // list is not influenced by submitter input.
+            const fs = require("fs");
+            const codeowners = fs.readFileSync(".github/CODEOWNERS", "utf8");
+            const owners = new Set(
+              codeowners
+                .split("\n")
+                .map((line) => line.replace(/#.*/, ""))
+                // Individual @handles only; team entries (@org/team) don't match.
+                .flatMap((line) => line.match(/@[A-Za-z0-9-]+(?![A-Za-z0-9/-])/g) ?? [])
+                .map((handle) => handle.slice(1).toLowerCase()),
+            );
+            if (owners.has(user.login.toLowerCase())) {
+              core.info("Submitter is a codeowner; skipping the spam gate.");
+              return;
+            }
+
             const reject = async () => {
               await github.rest.issues.createComment({
                 owner,
