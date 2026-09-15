@@ -1,19 +1,29 @@
-# CI checks for every pull request, plus a guard that keeps bot-created
-# submission branches from touching anything other than listing data.
-name: PR checks
+# Thin caller for the shared org checks (lint, format, types, knip, tests +
+# coverage, build, audit, Semgrep, CodeQL) — see
+# https://docs.nanocollective.org/collective/projects/project-infrastructure —
+# plus the Nanolist-specific jobs: listing data validation and a guard that
+# keeps bot-created submission branches from touching anything other than
+# listing data.
+name: Pull Request Automated Checks
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [master]
 
 permissions:
+  actions: read
   contents: read
-
-concurrency:
-  group: pr-checks-${{ github.event.pull_request.number }}
-  cancel-in-progress: true
+  security-events: write
 
 jobs:
-  checks:
+  pr-checks:
+    uses: Nano-Collective/.github/.github/workflows/pr-checks.yml@main
+
+  # Listing data is the product. Validate every data/listings/*.json against
+  # the schema and assert the issue templates are in sync with the taxonomy.
+  validate-listings:
+    name: Validate Listings
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -31,20 +41,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run linting
-        run: pnpm lint
-
-      - name: Run type checking
-        run: pnpm types
-
-      - name: Check for unused files and dependencies
-        run: pnpm knip
-
-      - name: Validate listings
+      - name: Validate listings and template sync
         run: pnpm validate
-
-      - name: Build site
-        run: pnpm exec next build --turbopack
 
   # Submission PRs are created by automation from hostile submitter input.
   # They may only ever add listing JSON and icons — anything else fails.
