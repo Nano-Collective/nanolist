@@ -1,29 +1,39 @@
-# CI checks for every pull request, plus a guard that keeps bot-created
-# submission branches from touching anything other than listing data.
-name: PR checks
+# Thin caller for the shared org checks (lint, format, types, knip, tests +
+# coverage, build, audit, Semgrep, CodeQL) — see
+# https://docs.nanocollective.org/collective/projects/project-infrastructure —
+# plus the Nanolist-specific jobs: listing data validation and a guard that
+# keeps bot-created submission branches from touching anything other than
+# listing data.
+name: Pull Request Automated Checks
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [master]
 
 permissions:
+  actions: read
   contents: read
-
-concurrency:
-  group: pr-checks-${{ github.event.pull_request.number }}
-  cancel-in-progress: true
+  security-events: write
 
 jobs:
-  checks:
+  pr-checks:
+    uses: Nano-Collective/.github/.github/workflows/pr-checks.yml@main
+
+  # Listing data is the product. Validate every data/listings/*.json against
+  # the schema and assert the issue templates are in sync with the taxonomy.
+  validate-listings:
+    name: Validate Listings
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
       - name: Set up PNPM
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
 
       - name: Use Node.js 22
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22
           cache: "pnpm"
@@ -31,20 +41,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run linting
-        run: pnpm lint
-
-      - name: Run type checking
-        run: pnpm types
-
-      - name: Check for unused files and dependencies
-        run: pnpm knip
-
-      - name: Validate listings
+      - name: Validate listings and template sync
         run: pnpm validate
-
-      - name: Build site
-        run: pnpm exec next build --turbopack
 
   # Submission PRs are created by automation from hostile submitter input.
   # They may only ever add listing JSON and icons — anything else fails.
@@ -53,18 +51,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
 
       - name: Only listing and icon files may change
-        # github.base_ref is the PR's target branch name — repository
-        # controlled (branches exist only if a collaborator created them),
-        # so it is safe to interpolate here. No submitter-controlled value
-        # is interpolated into this script.
+        # github.base_ref is passed through env rather than interpolated into
+        # the script, so no expression expansion happens inside run. No
+        # submitter-controlled value reaches this script at all.
+        env:
+          BASE_REF: ${{ github.base_ref }}
         run: |
           set -o pipefail
-          CHANGED="$(git diff --name-only "origin/${{ github.base_ref }}...")"
+          CHANGED="$(git diff --name-only "origin/${BASE_REF}...")"
           echo "Changed files:"
           # Indent when printing so file names can never be parsed as
           # ::workflow-commands:: (which must start at column 0).

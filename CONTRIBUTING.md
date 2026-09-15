@@ -26,9 +26,11 @@ The site runs at [http://localhost:3000](http://localhost:3000). It is a Next.js
 | `pnpm knip` | Dead code and unused dependency detection |
 | `pnpm validate` | Validate every file in `data/listings/` against the zod schema in `lib/schema.ts` |
 | `pnpm fetch-icons` | Fetch and self-host listing icons |
-| `pnpm test:all` | The full gate: types, lint, knip, validate |
+| `pnpm test:ava` | Run the test suite (ava) |
+| `pnpm test:ava:coverage` | Run the test suite with coverage reporting (c8) |
+| `pnpm test:all` | The full gate: format, lint, types, knip, validate, tests with coverage |
 
-Run `pnpm test:all` before opening a PR. CI runs the same gate, so if it passes locally it should pass there.
+Run `pnpm test:all` before opening a PR. CI runs the same gate through the collective's [shared workflow](https://docs.nanocollective.org/collective/projects/project-infrastructure), so if it passes locally it should pass there. CI additionally runs a dependency audit, Semgrep, and CodeQL as advisory checks.
 
 ## Coding Standards
 
@@ -60,9 +62,21 @@ Commits follow the collective's light convention:
 
 Lowercase, imperative mood, no trailing period. Scope is optional in parentheses.
 
+## Releases
+
+Nanolist is a deployed site, not a published package: merging to `master` triggers the Cloudflare Pages build, and that is the release. Contributors never bump the version in `package.json` — versioning, such as it is, is a maintainer responsibility.
+
+## Divergences from the collective playbook
+
+The [collective conventions](https://docs.nanocollective.org/collective/projects/creating-a-new-project) are the default here, with three documented divergences:
+
+- **No changesets or `release.yml`.** There is no package registry to publish to; deploys to Cloudflare Pages on merge are the release path.
+- **`CODEOWNERS` names individual maintainers** rather than `@Nano-Collective/core-team`. Every path requires a maintainer's review — that is the gate that stops automation-created submission PRs (built from hostile submitter input) from merging without a human's approval.
+- **The default branch is `master`**, not `main`.
+
 ## Code of Conduct
 
-Nanolist follows the [Nano Collective Code of Conduct](https://doc.nanocollective.org/collective/organisation/community). We do not redefine it here — read it there, and hold to it.
+Nanolist follows the [Nano Collective Code of Conduct](https://docs.nanocollective.org/collective/organisation/community). We do not redefine it here — read it there, and hold to it. Questions about contributor compensation are covered by the [Economics Charter](https://docs.nanocollective.org/collective/organisation/economics-charter); we do not restate its terms here.
 
 ## Questions?
 

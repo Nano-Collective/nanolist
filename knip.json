@@ -6,7 +6,8 @@
     "scripts/**/*.{ts,mjs,js}",
     "lib/schema.ts",
     "lib/listings.ts",
-    "lib/utils.ts"
+    "lib/utils.ts",
+    "tests/**/*.test.ts"
   ],
   "rules": {
     "files": "error",
@@ -22,5 +23,6 @@
     "nsTypes": "warn",
     "enumMembers": "warn",
     "duplicates": "warn"
-  }
+  },
+  "ignoreBinaries": ["semgrep"]
 }
