@@ -1,0 +1,23 @@
+{
+  "slug": "vibe-offline-whisper",
+  "name": "Vibe (Offline Whisper)",
+  "description": "Open-source desktop app for offline audio and video transcription powered by Whisper — batch transcribe on macOS, Windows and Linux with GPU support; nothing leaves your machine.",
+  "url": "https://thewh1teagle.github.io/vibe/",
+  "author": "@thewh1teagle",
+  "categories": ["audio-voice"],
+  "tags": ["whisper", "text-to-speech", "speech-to-text", "desktop-app"],
+  "attributes": {
+    "openSource": false,
+    "localFirst": false,
+    "privacyFirst": false,
+    "selfHostable": false
+  },
+  "pricing": "open-source",
+  "license": "MIT",
+  "github": "https://github.com/thewh1teagle/vibe",
+  "icon": null,
+  "submittedBy": "mrspence",
+  "addedAt": "2026-09-15",
+  "recommendedAt": null,
+  "status": "active"
+}
