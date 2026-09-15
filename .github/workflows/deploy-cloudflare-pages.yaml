@@ -49,6 +49,11 @@ jobs:
       - name: Generate build
         run: pnpm run build
 
+      # Next writes build internals alongside the static export; the cache can
+      # exceed Cloudflare Pages' 25 MiB per-file upload limit.
+      - name: Prune build internals from export
+        run: rm -rf dist/cache
+
       - name: Publish to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
