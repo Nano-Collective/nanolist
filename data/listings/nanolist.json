@@ -1,0 +1,23 @@
+{
+  "slug": "nanolist",
+  "name": "Nanolist",
+  "description": "A community-curated directory with a bias toward open-source, local-first, privacy-respecting software.",
+  "url": "https://list.nanocollective.org",
+  "author": "Nano Collective",
+  "categories": ["learning-resources"],
+  "tags": [],
+  "attributes": {
+    "openSource": true,
+    "localFirst": false,
+    "privacyFirst": false,
+    "selfHostable": false
+  },
+  "pricing": "open-source",
+  "license": "MIT",
+  "github": "https://github.com/Nano-Collective/nanolist",
+  "icon": null,
+  "submittedBy": "mrspence",
+  "addedAt": "2026-09-15",
+  "recommendedAt": null,
+  "status": "active"
+}
