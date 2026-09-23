@@ -4,16 +4,8 @@
   "description": "Open-source, OpenAI-compatible AI engine that runs LLMs, image, audio and video models locally on consumer hardware — no GPU required and no data leaves your machine.",
   "url": "https://localai.io",
   "author": "Ettore Di Giacinto (@mudler)",
-  "categories": [
-    "local-inference"
-  ],
-  "tags": [
-    "agents",
-    "cpu-inference",
-    "inference-server",
-    "gpu",
-    "local-llm"
-  ],
+  "categories": ["local-inference"],
+  "tags": ["agents", "cpu-inference", "inference-server", "gpu", "local-llm"],
   "attributes": {
     "openSource": false,
     "localFirst": false,
