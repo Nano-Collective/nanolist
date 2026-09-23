@@ -4,14 +4,8 @@
   "description": "Open-source, local-first AI meeting notepad (formerly Hyprnote) — records and transcribes meetings on-device and turns raw notes into structured summaries using local models.",
   "url": "https://anarlog.so",
   "author": "Fastrepl (@fastrepl)",
-  "categories": [
-    "audio-voice"
-  ],
-  "tags": [
-    "desktop-app",
-    "speech-to-text",
-    "local-llm"
-  ],
+  "categories": ["audio-voice"],
+  "tags": ["desktop-app", "speech-to-text", "local-llm"],
   "attributes": {
     "openSource": false,
     "localFirst": false,
