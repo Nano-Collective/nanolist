@@ -216,14 +216,6 @@ jobs:
           esac
           echo "slug=$SLUG" >> "$GITHUB_OUTPUT"
 
-      # The generated JSON must match the repo's Biome formatting, or the
-      # pr-checks lint job fails on the bot's own PR (e.g. Biome keeps short
-      # arrays on one line where JSON.stringify breaks them across lines).
-      - name: Format listing file
-        env:
-          SLUG: ${{ steps.write.outputs.slug }}
-        run: pnpm exec biome format --write "data/listings/$SLUG.json"
-
       - name: Fetch icon (best effort)
         # scripts/fetch-icons.ts may not exist yet; the icon is optional.
         continue-on-error: true
@@ -235,6 +227,17 @@ jobs:
           else
             echo "scripts/fetch-icons.ts not present; skipping icon fetch"
           fi
+
+      # Format LAST, after every step that writes the listing JSON. Both
+      # parse-submission.ts and fetch-icons.ts serialize with
+      # JSON.stringify(…, 2), which breaks short arrays across lines where
+      # Biome keeps them inline — so the file must be re-formatted after the
+      # icon fetch rewrites it, or pr-checks' format job fails on the bot's
+      # own PR.
+      - name: Format listing file
+        env:
+          SLUG: ${{ steps.write.outputs.slug }}
+        run: pnpm exec biome format --write "data/listings/$SLUG.json"
 
       # NANOLIST_BOT_TOKEN is a fine-grained PAT scoped to this repository
       # only, with contents + pull-requests write. Using it means the PRs the
