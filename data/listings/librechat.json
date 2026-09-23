@@ -4,14 +4,8 @@
   "description": "Self-hostable, open-source chat UI supporting many providers and local models, with agents, MCP, search and multi-user auth. Bring your own keys; data stays on your server.",
   "url": "https://librechat.ai",
   "author": "Danny Avila (@danny-avila)",
-  "categories": [
-    "chat-assistants"
-  ],
-  "tags": [
-    "chatbot",
-    "agents",
-    "desktop-app"
-  ],
+  "categories": ["chat-assistants"],
+  "tags": ["chatbot", "agents", "desktop-app"],
   "attributes": {
     "openSource": false,
     "localFirst": false,
