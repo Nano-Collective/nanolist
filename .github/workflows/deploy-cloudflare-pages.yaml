@@ -55,10 +55,8 @@ jobs:
         run: rm -rf dist/cache
 
       - name: Publish to Cloudflare Pages
-        uses: cloudflare/pages-action@f0a1cd58cd66095dee69bfa18fa5efd1dde93bca # v1.5.0
+        uses: cloudflare/wrangler-action@4e88846969242f7752bcfdaf5511bfbb3985ca47 # v4.1.1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: nanolist
-          directory: ./dist
-          branch: main
+          command: pages deploy ./dist --project-name=nanolist --branch=main
