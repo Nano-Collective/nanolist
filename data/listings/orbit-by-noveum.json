@@ -1,0 +1,23 @@
+{
+  "slug": "orbit-by-noveum",
+  "name": "Orbit by Noveum",
+  "description": "Free task management for people and AI agents. Manage issues, projects, sprints, docs and files through a web app or hosted Streamable HTTP MCP at https://orbit.noveum.ai/mcp with workspace-scoped OAuth.",
+  "url": "https://orbit.noveum.ai",
+  "author": "Noveum",
+  "categories": ["productivity"],
+  "tags": ["agents", "collaboration", "documents", "typescript", "web-ui"],
+  "attributes": {
+    "openSource": false,
+    "localFirst": false,
+    "privacyFirst": false,
+    "selfHostable": false
+  },
+  "pricing": "free",
+  "license": "Apache-2.0",
+  "github": "https://github.com/Noveum/orbit",
+  "icon": "/icons/orbit-by-noveum.ico",
+  "submittedBy": "imshashank",
+  "addedAt": "2026-09-29",
+  "recommendedAt": null,
+  "status": "active"
+}
