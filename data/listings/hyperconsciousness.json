@@ -1,0 +1,23 @@
+{
+  "slug": "hyperconsciousness",
+  "name": "Hyperconsciousness",
+  "description": "Developer-alpha Rust knowledge store for humans and AI agents, with encrypted, append-only records, keyword search and MCP access through scoped, expiring grants. Runs locally; build from source.",
+  "url": "https://github.com/louis030195/hyperconsciousness",
+  "author": "Louis Beaumont",
+  "categories": ["search-knowledge"],
+  "tags": ["agents", "cli", "rust", "search"],
+  "attributes": {
+    "openSource": false,
+    "localFirst": false,
+    "privacyFirst": false,
+    "selfHostable": false
+  },
+  "pricing": "open-source",
+  "license": "MIT",
+  "github": "https://github.com/louis030195/hyperconsciousness",
+  "icon": "/icons/hyperconsciousness.ico",
+  "submittedBy": "louis030195",
+  "addedAt": "2026-09-29",
+  "recommendedAt": null,
+  "status": "active"
+}
