@@ -4,6 +4,8 @@ import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import test from "ava";
+import { getAllListings } from "../lib/listings";
+import { urlIdentity } from "../lib/url-identity";
 
 const FIXTURES = path.join(process.cwd(), "tests", "fixtures", "submission");
 const SCRIPT = path.join(process.cwd(), "scripts", "parse-submission.ts");
@@ -35,6 +37,35 @@ function validate(fields: Record<string, unknown>): Result {
   return JSON.parse(lines[lines.length - 1]);
 }
 
+// Reserved for tests that need a repo guaranteed absent from data/listings.
+const UNLISTED_OWNER = "nanolist-test-fixture-owner";
+const UNLISTED_REPO = "nanolist-test-fixture-repo";
+
+/**
+ * A repo URL taken from live listing data, so these tests assert behaviour
+ * against whatever is actually listed rather than against names that were
+ * listed when they were written. `field` picks which column to read: a repo
+ * recorded as a listing's `github`, or one used as its primary `url`.
+ */
+function listedRepo(field: "github" | "url"): string {
+  const match = getAllListings().find((listing) => {
+    const value = field === "github" ? listing.github : listing.url;
+    return (
+      value !== null && urlIdentity(value)?.startsWith("github.com/") === true
+    );
+  });
+  if (match === undefined) {
+    throw new Error(`no listing has a github.com repo in its ${field} field`);
+  }
+  return (field === "github" ? match.github : match.url) as string;
+}
+
+/** Owner of an already-listed repo, for "same owner, new repo" cases. */
+function listedOwner(): string {
+  const identity = urlIdentity(listedRepo("url"));
+  return (identity as string).split("/")[1];
+}
+
 const submission = (overrides: Record<string, unknown> = {}) => ({
   ...loadFixture("valid.json"),
   ...overrides,
@@ -61,23 +92,34 @@ test("a new product on an already-listed vendor domain is rejected", (t) => {
 });
 
 test("a GitHub-hosted submission is not blocked by other GitHub listings", (t) => {
-  // data/listings already contains three listings whose URL is a github.com
-  // repo; hostname-only matching rejected these two real submissions (#33, #26).
-  for (const [name, repo] of [
-    ["Hyperconsciousness", "https://github.com/louis030195/hyperconsciousness"],
-    ["Codex Quota Overlay", "https://github.com/cpys/codex-quota-overlay"],
-  ]) {
-    const result = validate(submission({ name, url: repo, github: repo }));
-    t.true(result.ok, `${name}: ${JSON.stringify(result.errors)}`);
-  }
+  // The regression this guards: several listings use a github.com repo as their
+  // URL, and hostname-only matching rejected every later GitHub submission
+  // (issues #33 and #26 were both false positives). The precondition is read
+  // from live data, and the candidate repo is a fixture name no listing can
+  // take, so approving a real submission can never turn this test red.
+  const onGitHub = getAllListings().filter(
+    (listing) => urlIdentity(listing.url)?.startsWith("github.com/") === true,
+  );
+  t.true(
+    onGitHub.length >= 2,
+    "expected at least two github.com-hosted listings for this to be meaningful",
+  );
+
+  const repo = `https://github.com/${UNLISTED_OWNER}/${UNLISTED_REPO}`;
+  const result = validate(
+    submission({ name: "Unlisted GitHub Tool", url: repo, github: repo }),
+  );
+  t.true(result.ok, JSON.stringify(result.errors));
 });
 
 test("an already-listed repo is rejected even under a new domain", (t) => {
+  // The gap the repo check closes: before it, only `url` was compared, so the
+  // same project could be listed twice under a fresh homepage.
   const result = validate(
     submission({
-      name: "Ollama Rebrand",
+      name: "Rebranded Duplicate",
       url: "https://an-unlisted-domain.example",
-      github: "https://github.com/ollama/ollama",
+      github: listedRepo("github"),
     }),
   );
   t.false(result.ok);
@@ -87,9 +129,9 @@ test("an already-listed repo is rejected even under a new domain", (t) => {
 test("a repo already listed as another listing's URL is rejected", (t) => {
   const result = validate(
     submission({
-      name: "Llama Redux",
+      name: "Cross Field Duplicate",
       url: "https://another-unlisted-domain.example",
-      github: "https://github.com/ggml-org/llama.cpp",
+      github: listedRepo("url"),
     }),
   );
   t.false(result.ok);
@@ -97,18 +139,15 @@ test("a repo already listed as another listing's URL is rejected", (t) => {
 });
 
 test("a different repo under an already-listed owner is accepted", (t) => {
+  const repo = `https://github.com/${listedOwner()}/${UNLISTED_REPO}`;
   const result = validate(
-    submission({
-      name: "GGML Something New",
-      url: "https://github.com/ggml-org/something-new",
-      github: "https://github.com/ggml-org/something-new",
-    }),
+    submission({ name: "Same Owner New Repo", url: repo, github: repo }),
   );
   t.true(result.ok, JSON.stringify(result.errors));
 });
 
 test("a repo given as both url and github reports a single error", (t) => {
-  const repo = "https://github.com/ggml-org/llama.cpp";
+  const repo = listedRepo("url");
   const result = validate(
     submission({ name: "Llama Dup", url: repo, github: repo }),
   );
