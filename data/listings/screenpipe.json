@@ -1,0 +1,31 @@
+{
+  "slug": "screenpipe",
+  "name": "screenpipe",
+  "description": "Desktop memory for macOS, Windows and Linux: search captured screen text and audio, recall meetings, and share context through MCP or a local API. History is local by default; configured cloud AI, transcription, sync and integrations can transmit context.",
+  "url": "https://screenpipe.com",
+  "author": "Screenpipe (Negentropy Labs, Inc.)",
+  "categories": ["search-knowledge", "productivity"],
+  "tags": [
+    "desktop-app",
+    "search",
+    "api",
+    "agents",
+    "speech-to-text",
+    "automation",
+    "rust"
+  ],
+  "attributes": {
+    "openSource": false,
+    "localFirst": false,
+    "privacyFirst": false,
+    "selfHostable": false
+  },
+  "pricing": "freemium",
+  "license": "Screenpipe Commercial License",
+  "github": "https://github.com/screenpipe/screenpipe",
+  "icon": "/icons/screenpipe.ico",
+  "submittedBy": "louis030195",
+  "addedAt": "2026-09-29",
+  "recommendedAt": null,
+  "status": "active"
+}
