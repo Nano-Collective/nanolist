@@ -51,7 +51,10 @@ When you submit, an automated workflow validates the issue and comments the resu
 - the URL is `https://` with a public hostname (no localhost or private IP ranges);
 - the description contains no HTML (`<`, `>`) or `javascript:` fragments;
 - field length limits (description 10–300 characters, name and author limits, at most 3 categories and 8 tags);
-- the tool is not already listed or pending as another submission;
+- the tool is not already listed or pending as another submission — matched on the
+  site's domain, and on the repository, so the same project cannot be listed twice
+  under a different address (projects that merely share a code host such as
+  GitHub are compared per repository, not per host);
 - your GitHub account is at least 7 days old;
 - you have submitted no more than 5 listings that day.
 
