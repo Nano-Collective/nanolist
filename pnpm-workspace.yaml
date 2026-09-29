@@ -3,4 +3,8 @@ allowBuilds:
   esbuild: true
   sharp: true
   unrs-resolver: true
+  # Not a project dependency: wrangler-action installs wrangler@4 (which
+  # pulls in workerd) during the Cloudflare Pages deploy, and pnpm exits
+  # non-zero if that build script is left unapproved.
+  workerd: true
 auditConfig: {}
