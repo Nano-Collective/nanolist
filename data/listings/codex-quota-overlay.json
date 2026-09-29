@@ -1,0 +1,23 @@
+{
+  "slug": "codex-quota-overlay",
+  "name": "Codex Quota Overlay",
+  "description": "Independent desktop companion for Codex that displays quota, reset time, and reset credits beside the conversation title on Windows and macOS. It monitors usage; it is not a coding model or an official OpenAI product.",
+  "url": "https://github.com/cpys/codex-quota-overlay",
+  "author": "Codex Quota Overlay contributors",
+  "categories": ["evals-observability"],
+  "tags": ["desktop-app", "observability"],
+  "attributes": {
+    "openSource": false,
+    "localFirst": false,
+    "privacyFirst": false,
+    "selfHostable": false
+  },
+  "pricing": "open-source",
+  "license": "MIT",
+  "github": "https://github.com/cpys/codex-quota-overlay",
+  "icon": "/icons/codex-quota-overlay.ico",
+  "submittedBy": "cpys",
+  "addedAt": "2026-09-29",
+  "recommendedAt": null,
+  "status": "active"
+}
