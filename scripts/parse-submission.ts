@@ -20,6 +20,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { getAllCategories, getAllListings } from "@/lib/listings";
 import { type Listing, listingSchema } from "@/lib/schema";
+import { urlIdentity } from "@/lib/url-identity";
 
 const LISTINGS_DIR = path.join(process.cwd(), "data", "listings");
 
@@ -102,15 +103,6 @@ function slugify(name: string): string {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
-}
-
-/** Hostname of a URL, lowercased, without a leading "www.". Null if unparseable. */
-function normalizedHostname(url: string): string | null {
-  try {
-    return new URL(url).hostname.toLowerCase().replace(/^www\./, "");
-  } catch {
-    return null;
-  }
 }
 
 function hintFor(field: string): string {
@@ -249,15 +241,29 @@ function main(): void {
     errors.push("slug: a listing with this slug already exists");
   }
 
-  const newHost = normalizedHostname(listing.url);
+  // Every URL an existing listing is reachable by — its own URL and its repo —
+  // so a tool cannot be resubmitted under its other address. On a vendor domain
+  // an identity is the bare hostname; on a multi-tenant host it is host/owner/repo,
+  // so one GitHub-hosted listing no longer blocks every later GitHub submission.
+  const taken = new Set<string>();
   for (const other of existing) {
-    if (
-      other.url === listing.url ||
-      (newHost !== null && normalizedHostname(other.url) === newHost)
-    ) {
-      errors.push("url: this URL or its domain is already listed");
-      break;
+    for (const url of [other.url, other.github]) {
+      if (url === null) continue;
+      const identity = urlIdentity(url);
+      if (identity !== null) taken.add(identity);
     }
+  }
+
+  const urlId = urlIdentity(listing.url);
+  if (urlId !== null && taken.has(urlId)) {
+    errors.push("url: this URL or its domain is already listed");
+  }
+
+  // Skipped when the repo *is* the listing URL, so an open-source project that
+  // gives the same link twice gets one error to fix rather than two.
+  const githubId = listing.github === null ? null : urlIdentity(listing.github);
+  if (githubId !== null && githubId !== urlId && taken.has(githubId)) {
+    errors.push("github: this repository is already listed");
   }
 
   if (errors.length > 0) {
